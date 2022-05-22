@@ -20,7 +20,7 @@ const NavItems = () => {
     return (
         <>
             {items.map((item) => (
-                <li>
+                <li key={item.name}>
                     <CustomLink to={item.path}>{item.name}</CustomLink>
                 </li>
             ))}
