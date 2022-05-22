@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import NavItems from "./NavItems";
 
 const Navbar = () => {
@@ -29,7 +30,9 @@ const Navbar = () => {
                         <NavItems />
                     </ul>
                 </div>
-                <a className="text-xl normal-case btn btn-ghost">EC-360</a>
+                <Link to="/" className="text-xl normal-case">
+                    EC-360
+                </Link>
             </div>
             <div className="hidden navbar-end lg:flex">
                 <ul className="p-0 menu menu-horizontal">
