@@ -5,6 +5,7 @@ import Orders from "./Dashboard/Orders";
 import Profile from "./Dashboard/Profile";
 import Footer from "./Footer";
 import Home from "./Home";
+import Login from "./Login";
 import Navbar from "./Navbar";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
             <main>
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
                     <Route path="dashboard" element={<Dashboard />}>
                         <Route index element={<Profile />} />
                         <Route path="orders" element={<Orders />} />
