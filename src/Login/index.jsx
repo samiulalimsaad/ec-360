@@ -141,7 +141,7 @@ const Login = () => {
                                     <img
                                         src="/images/google.png"
                                         alt=""
-                                        className="h-6"
+                                        className="h-6 mx-2"
                                     />
                                     Sign in With Google
                                 </button>
@@ -150,7 +150,7 @@ const Login = () => {
                                 <p>Don't have an account?</p>
                                 <NavLink
                                     to="/signup"
-                                    className="ml-1 text-sky-600"
+                                    className="ml-2 text-sky-600"
                                 >
                                     Create New
                                 </NavLink>
