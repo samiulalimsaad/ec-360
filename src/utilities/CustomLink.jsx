@@ -9,7 +9,7 @@ const CustomLink = ({ to, children, ...props }) => {
                 `btn btn-link
                 ${
                     isActive
-                        ? "btn-active text-warning decoration-transparent"
+                        ? "btn-active text-primary decoration-transparent"
                         : ""
                 }`
             }

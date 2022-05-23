@@ -5,7 +5,7 @@ import NavItems from "./NavItems";
 
 const Navbar = () => {
     return (
-        <div className="navbar bg-primary text-primary-content">
+        <div className="navbar bg-info text-info-content">
             <div className="flex justify-between w-full sm:navbar-start">
                 <div className="dropdown">
                     <label tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -31,7 +31,8 @@ const Navbar = () => {
                         <NavItems />
                     </ul>
                 </div>
-                <Link to="/" className="text-xl normal-case">
+                <Link to="/" className="flex items-center text-xl normal-case">
+                    <img src="/images/icon.png" className="w-8 h-8" alt="" />
                     EC-360
                 </Link>
                 <label
