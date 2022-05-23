@@ -1,3 +1,4 @@
+import { DotsVerticalIcon } from "@heroicons/react/outline";
 import React from "react";
 import { Link } from "react-router-dom";
 import NavItems from "./NavItems";
@@ -5,7 +6,7 @@ import NavItems from "./NavItems";
 const Navbar = () => {
     return (
         <div className="navbar bg-primary text-primary-content">
-            <div className="navbar-start">
+            <div className="flex justify-between w-full sm:navbar-start">
                 <div className="dropdown">
                     <label tabIndex="0" className="btn btn-ghost lg:hidden">
                         <svg
@@ -33,6 +34,12 @@ const Navbar = () => {
                 <Link to="/" className="text-xl normal-case">
                     EC-360
                 </Link>
+                <label
+                    htmlFor="side-panel"
+                    className="btn btn-primary drawer-button lg:hidden"
+                >
+                    <DotsVerticalIcon className="w-6 h-6" />
+                </label>
             </div>
             <div className="hidden navbar-end lg:flex">
                 <ul className="p-0 menu menu-horizontal">
