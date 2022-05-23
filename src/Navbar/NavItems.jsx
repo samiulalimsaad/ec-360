@@ -1,5 +1,5 @@
 import React from "react";
-import CustomLink from "../utilis/CusomLink";
+import CustomLink from "../utilities/CustomLink";
 
 const items = [
     {
