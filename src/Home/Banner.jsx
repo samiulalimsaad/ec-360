@@ -2,7 +2,7 @@ import React from "react";
 
 const Banner = () => {
     return (
-        <div
+        <section
             className="min-h-screen hero"
             style={{
                 backgroundImage: "url(/images/banner.jpg)",
@@ -24,7 +24,7 @@ const Banner = () => {
                     </a>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

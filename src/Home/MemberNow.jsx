@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const MemberNow = () => {
     return (
-        <div
+        <section
             className="hero"
             style={{ backgroundImage: "url('/images/member-section.jpg')" }}
         >
@@ -18,7 +18,7 @@ const MemberNow = () => {
                     </Link>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

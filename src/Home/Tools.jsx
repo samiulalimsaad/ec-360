@@ -41,13 +41,13 @@ const data = [
 
 const Tools = () => {
     return (
-        <div className="container py-20 mx-auto">
+        <section className="container px-4 py-20 mx-auto">
             <h2 className="my-5 text-5xl text-center">Tools</h2>
-            <div className="grid items-center justify-center grid-cols-3 gap-8">
+            <div className="grid items-center grid-cols-1 gap-5 justify-evenly sm:grid-cols-2 md:grid-cols-3">
                 {data.map((v) => (
                     <div
                         key={v._id}
-                        className="shadow-xl card card-compact w-96 bg-base-100 justify-self-center"
+                        className="shadow-xl card card-compact bg-base-100 justify-self-center"
                     >
                         <figure>
                             <img
@@ -67,7 +67,7 @@ const Tools = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </section>
     );
 };
 
