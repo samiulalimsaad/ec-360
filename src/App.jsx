@@ -7,7 +7,9 @@ import Footer from "./Footer";
 import Home from "./Home";
 import Login from "./Login";
 import Navbar from "./Navbar";
+import Purchase from "./Purchase";
 import Signup from "./Signup";
+import PrivateRoute from "./utilities/PrivateRoute";
 
 function App() {
     return (
@@ -17,9 +19,17 @@ function App() {
             </header>
             <main>
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/signup" element={<Signup />} />
+                    <Route index element={<Home />} />
+                    <Route path="login" element={<Login />} />
+                    <Route path="signup" element={<Signup />} />
+                    <Route
+                        path="purchase/:id"
+                        element={
+                            <PrivateRoute>
+                                <Purchase />
+                            </PrivateRoute>
+                        }
+                    />
                     <Route path="dashboard" element={<Dashboard />}>
                         <Route index element={<Profile />} />
                         <Route path="orders" element={<Orders />} />
