@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const data = [
     {
@@ -59,9 +60,12 @@ const Tools = () => {
                             <h2 className="card-title">{v.title}</h2>
                             <p>{v.description}</p>
                             <div className="justify-center card-actions">
-                                <button className="btn btn-ghost">
+                                <Link
+                                    to={`/purchase/${v._id}`}
+                                    className="btn btn-ghost"
+                                >
                                     Buy Now
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>
