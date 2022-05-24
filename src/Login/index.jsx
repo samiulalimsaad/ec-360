@@ -31,24 +31,44 @@ const Login = () => {
     const from = location.state?.from?.pathname || "/";
 
     useEffect(() => {
-        if (user1 || user || userGoogle) {
+        if (user1?.email || user?.email || userGoogle?.email) {
             const userData = {
                 email: user1?.email,
                 name: user1?.displayName,
             };
+            console.log({ userData });
             axios
-                .post(`http://localhost:5000/login`, userData, {
+                .post(`http://localhost:5000/user`, userData, {
                     header: {
                         "Access-Control-Allow-Origin": "*",
                         "Access-Control-Allow-Methods": "*",
                     },
                 })
                 .then(({ data }) => {
+                    console.log(data);
                     if (data.success) {
                         localStorage.setItem("accessToken", data.token);
                         navigate(from, { replace: true });
                     } else {
-                        signOut(auth);
+                        axios
+                            .post(`http://localhost:5000/login`, userData, {
+                                header: {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Access-Control-Allow-Methods": "*",
+                                },
+                            })
+                            .then(({ data }) => {
+                                if (data.success) {
+                                    localStorage.setItem(
+                                        "accessToken",
+                                        data.token
+                                    );
+                                    navigate(from, { replace: true });
+                                } else {
+                                    toast.error(data?.message);
+                                    signOut(auth);
+                                }
+                            });
                     }
                 });
         } else {
@@ -63,6 +83,31 @@ const Login = () => {
         if (email && password) {
             signInWithEmailAndPassword(email, password);
         }
+    };
+
+    const signInGoogle = (e) => {
+        e.preventDefault();
+        const userData = {
+            email: user1?.email,
+            name: user1?.displayName,
+        };
+        console.log({ userData });
+        signInWithGoogle();
+        axios
+            .post(`http://localhost:5000/user`, userData, {
+                header: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "*",
+                },
+            })
+            .then(({ data }) => {
+                if (data.success) {
+                    localStorage.setItem("accessToken", data.token);
+                    navigate(from, { replace: true });
+                } else {
+                    signOut(auth);
+                }
+            });
     };
 
     return (
@@ -137,7 +182,7 @@ const Login = () => {
                                 <div className="divider">OR</div>
                                 <button
                                     className="w-full btn btn-error"
-                                    onClick={() => signInWithGoogle()}
+                                    onClick={signInGoogle}
                                 >
                                     <img
                                         src="/images/google.png"
@@ -155,20 +200,6 @@ const Login = () => {
                                 >
                                     Create New
                                 </NavLink>
-                            </div>
-                            <div className="flex items-center justify-center mt-4 text-sky-600">
-                                <button
-                                    type="button"
-                                    onClick={async () => {
-                                        await updatePassword(email);
-                                        toast.success("Updated password!", {
-                                            theme: "dark",
-                                        });
-                                    }}
-                                    disabled={isSubmitting}
-                                >
-                                    Forgot Password?
-                                </button>
                             </div>
                         </Form>
                     )}
