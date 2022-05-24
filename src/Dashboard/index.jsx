@@ -10,7 +10,7 @@ const Dashboard = () => {
                     type="checkbox"
                     className="drawer-toggle"
                 />
-                <div className="flex flex-col items-center justify-center drawer-content">
+                <div className="drawer-content">
                     <Outlet />
                 </div>
                 <div className="drawer-side">
