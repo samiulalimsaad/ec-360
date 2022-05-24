@@ -1,51 +1,19 @@
 import React from "react";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-
-const data = [
-    {
-        _id: 1,
-        title: "Title",
-        description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat nemo debitis error officiis rerum vitae voluptatem eaque omnis, ut facere perferendis voluptates ipsam pariatur totam autem ipsa eos placeat dignissimos.",
-    },
-    {
-        _id: 2,
-        title: "Title",
-        description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat nemo debitis error officiis rerum vitae voluptatem eaque omnis, ut facere perferendis voluptates ipsam pariatur totam autem ipsa eos placeat dignissimos.",
-    },
-    {
-        _id: 3,
-        title: "Title",
-        description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat nemo debitis error officiis rerum vitae voluptatem eaque omnis, ut facere perferendis voluptates ipsam pariatur totam autem ipsa eos placeat dignissimos.",
-    },
-    {
-        _id: 4,
-        title: "Title",
-        description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat nemo debitis error officiis rerum vitae voluptatem eaque omnis, ut facere perferendis voluptates ipsam pariatur totam autem ipsa eos placeat dignissimos.",
-    },
-    {
-        _id: 5,
-        title: "Title",
-        description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat nemo debitis error officiis rerum vitae voluptatem eaque omnis, ut facere perferendis voluptates ipsam pariatur totam autem ipsa eos placeat dignissimos.",
-    },
-    {
-        _id: 6,
-        title: "Title",
-        description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat nemo debitis error officiis rerum vitae voluptatem eaque omnis, ut facere perferendis voluptates ipsam pariatur totam autem ipsa eos placeat dignissimos.",
-    },
-];
+import apiClient from "../utilities/axios";
 
 const Tools = () => {
+    const { isLoading, error, data } = useQuery(
+        "purchase",
+        async () => (await apiClient("/products")).data
+    );
+
     return (
         <section id="explore" className="container px-4 py-20 mx-auto">
             <h2 className="my-5 text-5xl text-center">Tools</h2>
             <div className="grid items-center grid-cols-1 gap-5 justify-evenly sm:grid-cols-2 md:grid-cols-3">
-                {data.map((v) => (
+                {data?.products?.map((v) => (
                     <div
                         key={v._id}
                         className="shadow-xl card card-compact bg-base-100 justify-self-center"
@@ -57,8 +25,15 @@ const Tools = () => {
                             />
                         </figure>
                         <div className="card-body">
-                            <h2 className="card-title">{v.title}</h2>
-                            <p>{v.description}</p>
+                            <h2 className="card-title">{v.name}</h2>
+                            <p className="text-2xl text-slate-700">
+                                ${v.price}
+                            </p>
+                            <div className="flex text-xl justify-evenly text-slate-700">
+                                <p>min:{v.minOrderQuantity}</p>
+                                <p>available{v.availableQuantity}</p>
+                            </div>
+                            <p className="text-slate-700">{v.description}</p>
                             <div className="justify-center card-actions">
                                 <Link
                                     to={`/purchase/${v._id}`}
