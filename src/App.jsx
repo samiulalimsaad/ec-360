@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Dashboard from "./Dashboard";
 import AddReview from "./Dashboard/AddReview";
 import Orders from "./Dashboard/Orders";
@@ -40,6 +41,9 @@ function App() {
             <footer>
                 <Footer />
             </footer>
+            <>
+                <ToastContainer theme="dark" />
+            </>
         </>
     );
 }
