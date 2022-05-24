@@ -5,7 +5,7 @@ import apiClient from "../utilities/axios";
 
 const Tools = () => {
     const { isLoading, error, data } = useQuery(
-        "purchase",
+        "tools",
         async () => (await apiClient("/products")).data
     );
 
