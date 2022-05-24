@@ -6,10 +6,11 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import React from "react";
+import { toast } from "react-toastify";
 
 const stripePromise = loadStripe(process.env.VITE_card_key);
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ setTransactionId }) => {
     const stripe = useStripe();
     const elements = useElements();
 
@@ -39,9 +40,10 @@ const CheckoutForm = () => {
         });
 
         if (error) {
-            console.log("[error]", error);
+            toast.error(error.message);
         } else {
-            console.log("[PaymentMethod]", paymentMethod);
+            toast.success("Payment successful");
+            setTransactionId(paymentMethod.id);
         }
     };
 
@@ -76,9 +78,9 @@ const CheckoutForm = () => {
     );
 };
 
-const PaymentForm = () => (
+const PaymentForm = ({ setTransactionId }) => (
     <Elements stripe={stripePromise}>
-        <CheckoutForm />
+        <CheckoutForm setTransactionId={setTransactionId} />
     </Elements>
 );
 

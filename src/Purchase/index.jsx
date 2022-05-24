@@ -18,6 +18,7 @@ const Purchase = () => {
         async () => (await apiClient(`/products/${id}`)).data
     );
     const [min, setMin] = useState(0);
+    const [transactionId, setTransactionId] = useState("");
 
     if (isLoading) return <Loading />;
 
@@ -28,7 +29,7 @@ const Purchase = () => {
                 <div className="w-full max-w-xl shadow-2xl card bg-base-100">
                     <div className="card-body">
                         <fieldset className="p-6 border rounded border-base-900">
-                            <legend className="text-xl text-slate-900 text-semibold">
+                            <legend className="text-xl font-semibold text-slate-900">
                                 User Information:
                             </legend>
                             <div className="form-control">
@@ -55,7 +56,7 @@ const Purchase = () => {
                             </div>
                         </fieldset>
                         <fieldset className="p-6 border rounded border-base-900">
-                            <legend className="text-xl text-slate-900 text-semibold">
+                            <legend className="text-xl font-semibold text-slate-900">
                                 Product Information:
                             </legend>
                             <div className="form-control">
@@ -123,11 +124,20 @@ const Purchase = () => {
                             </div>
                         </fieldset>
                         <fieldset className="p-6 border rounded border-base-900">
-                            <legend className="text-xl text-slate-900 text-semibold">
+                            <legend className="text-xl font-semibold text-slate-900">
                                 Payment Information:
                             </legend>
                             <div className="my-2">
-                                <PaymentForm />
+                                {transactionId && (
+                                    <div className="my-4 text-success">
+                                        <span className="font-semibold">
+                                            Transaction Id : {transactionId}
+                                        </span>
+                                    </div>
+                                )}
+                                <PaymentForm
+                                    setTransactionId={setTransactionId}
+                                />
                             </div>
                         </fieldset>
                     </div>
