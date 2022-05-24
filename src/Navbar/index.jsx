@@ -1,9 +1,11 @@
 import { DotsVerticalIcon } from "@heroicons/react/outline";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import NavItems from "./NavItems";
 
 const Navbar = () => {
+    const location = useLocation();
+    console.log(location);
     return (
         <div className="navbar bg-info text-info-content">
             <div className="flex justify-between w-full sm:navbar-start">
@@ -26,7 +28,7 @@ const Navbar = () => {
                     </label>
                     <ul
                         tabIndex="0"
-                        className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-primary rounded-box w-52"
+                        className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-accent rounded-box w-52"
                     >
                         <NavItems />
                     </ul>
@@ -35,12 +37,16 @@ const Navbar = () => {
                     <img src="/images/icon.png" className="w-8 h-8" alt="" />
                     EC-360
                 </Link>
-                <label
-                    htmlFor="side-panel"
-                    className="btn btn-primary drawer-button lg:hidden"
-                >
-                    <DotsVerticalIcon className="w-6 h-6" />
-                </label>
+                {location.pathname.split("/").includes("dashboard") ? (
+                    <label
+                        htmlFor="side-panel"
+                        className="drawer-button lg:hidden"
+                    >
+                        <DotsVerticalIcon className="w-6 h-6" />
+                    </label>
+                ) : (
+                    <label></label>
+                )}
             </div>
             <div className="hidden navbar-end lg:flex">
                 <ul className="p-0 menu menu-horizontal">
