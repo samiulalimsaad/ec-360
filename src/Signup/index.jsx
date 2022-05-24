@@ -1,3 +1,5 @@
+import axios from "axios";
+import { signOut } from "firebase/auth";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import {
@@ -14,7 +16,7 @@ const Signup = () => {
     useTitle("SignUp");
     const [createUserWithEmailAndPassword, user1, loading, error] =
         useCreateUserWithEmailAndPassword(auth, {
-            sendEmailVerification: true,
+            // sendEmailVerification: true,
         });
     const [updateProfile, updating] = useUpdateProfile(auth);
 
@@ -25,10 +27,10 @@ const Signup = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const from = location.state?.from?.pathname || "/login";
+    const from = location.state?.from?.pathname || "/";
 
     useEffect(() => {
-        if (user?.emailVerified) {
+        if (user?.email) {
             navigate(from, { replace: true });
         }
     }, [user]);
@@ -40,11 +42,34 @@ const Signup = () => {
         const password = event.target.password.value;
         if (name && email && password) {
             createUserWithEmailAndPassword(email, password).then(() => {
-                setMessage(
-                    `check your mail ${email}. please don't forget to check spam. then back here and refresh the page`
-                );
+                // setMessage(
+                //     `check your mail ${email}. please don't forget to check spam. then back here and refresh the page`
+                // );
                 updateProfile({ displayName: name });
+
+                const userData = {
+                    email,
+                    name,
+                    role: "admin",
+                };
+                console.log({ userData });
+                axios
+                    .post(`http://localhost:5000/user`, userData, {
+                        header: {
+                            "Access-Control-Allow-Origin": "*",
+                            "Access-Control-Allow-Methods": "*",
+                        },
+                    })
+                    .then(({ data }) => {
+                        if (data.success) {
+                            localStorage.setItem("accessToken", data.token);
+                            navigate(from, { replace: true });
+                        } else {
+                            signOut(auth);
+                        }
+                    });
                 event.target.reset();
+                // navigate("/login", { replace: true });
             });
         }
     };
