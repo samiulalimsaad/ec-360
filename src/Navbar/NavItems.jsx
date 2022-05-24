@@ -31,9 +31,15 @@ const NavItems = () => {
                 </li>
             ))}
             {user ? (
-                <button className="btn btn-ghost" onClick={() => signOut(auth)}>
-                    Logout
-                </button>
+                <>
+                    <button
+                        className="btn btn-ghost"
+                        onClick={() => signOut(auth)}
+                    >
+                        Logout
+                    </button>
+                    <p className="btn btn-ghost">{user?.displayName}</p>
+                </>
             ) : (
                 <>
                     <li>
