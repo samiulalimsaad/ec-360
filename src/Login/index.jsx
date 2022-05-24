@@ -134,6 +134,7 @@ const Login = () => {
                                 >
                                     Sign In
                                 </button>
+                                <div className="divider">OR</div>
                                 <button
                                     className="w-full btn btn-error"
                                     onClick={() => signInWithGoogle()}

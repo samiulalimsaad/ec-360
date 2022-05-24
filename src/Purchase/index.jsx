@@ -2,8 +2,10 @@ import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase.init";
 import PaymentForm from "../PaymentForm";
+import useTitle from "../utilities/useTitle";
 
 const Purchase = () => {
+    useTitle("Purchase");
     const [user, loading, error] = useAuthState(auth);
     return (
         <div>

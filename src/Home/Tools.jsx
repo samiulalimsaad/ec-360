@@ -42,7 +42,7 @@ const data = [
 
 const Tools = () => {
     return (
-        <section className="container px-4 py-20 mx-auto">
+        <section id="explore" className="container px-4 py-20 mx-auto">
             <h2 className="my-5 text-5xl text-center">Tools</h2>
             <div className="grid items-center grid-cols-1 gap-5 justify-evenly sm:grid-cols-2 md:grid-cols-3">
                 {data.map((v) => (

@@ -9,8 +9,8 @@ data.fill({
 });
 const Reviews = () => {
     return (
-        <section className="container mx-auto">
-            <h2 className="text-4xl text-center">Reviews</h2>
+        <section className="container py-20 mx-auto">
+            <h2 className="mb-10 text-4xl text-center">Reviews</h2>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {data.map((v, i) => (
                     <div key={i} className="shadow-xl card bg-base-100">
