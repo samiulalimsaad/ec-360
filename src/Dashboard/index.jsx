@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
     return (
@@ -20,13 +20,34 @@ const Dashboard = () => {
                     ></label>
                     <ul className="p-4 overflow-y-auto menu w-80 bg-sky-100 text-base-content">
                         <li>
-                            <Link to="/dashboard">My Profile</Link>
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive ? "bg-base-300 font-semibold" : ""
+                                }
+                                to="/dashboard"
+                            >
+                                My Profile
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to="/dashboard/orders">My Orders</Link>
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive ? "bg-base-300 font-semibold" : ""
+                                }
+                                to="/dashboard/orders"
+                            >
+                                My Orders
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to="/dashboard/add-review">Add a Review</Link>
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive ? "bg-base-300 font-semibold" : ""
+                                }
+                                to="/dashboard/add-review"
+                            >
+                                Add a Review
+                            </NavLink>
                         </li>
                     </ul>
                 </div>
