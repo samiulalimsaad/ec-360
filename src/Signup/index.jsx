@@ -52,7 +52,6 @@ const Signup = () => {
                     name,
                     role: "admin",
                 };
-                console.log({ userData });
                 axios
                     .post(`http://localhost:5000/user`, userData, {
                         header: {

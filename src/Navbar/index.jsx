@@ -5,7 +5,6 @@ import NavItems from "./NavItems";
 
 const Navbar = () => {
     const location = useLocation();
-    console.log(location);
     return (
         <div className="navbar bg-info text-info-content">
             <div className="flex justify-between w-full sm:navbar-start">

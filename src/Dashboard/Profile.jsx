@@ -16,9 +16,7 @@ const Profile = () => {
         ["Profile", user],
         async () => (await apiClient(`/user?email=${user?.email}`)).data
     );
-    console.log(data);
     const updateUser = async (values) => {
-        console.log(values);
         try {
             const profile = await apiClient.patch(
                 `/user/${data?.user?._id}`,
@@ -26,7 +24,6 @@ const Profile = () => {
             );
             toast.success(profile.data.message);
         } catch (error) {
-            console.log(error);
             toast.error(error.message);
         }
     };

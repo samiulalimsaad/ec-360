@@ -36,39 +36,20 @@ const Login = () => {
                 email: user1?.email,
                 name: user1?.displayName,
             };
-            console.log({ userData });
             axios
-                .post(`http://localhost:5000/user`, userData, {
+                .post(`http://localhost:5000/login`, userData, {
                     header: {
                         "Access-Control-Allow-Origin": "*",
                         "Access-Control-Allow-Methods": "*",
                     },
                 })
                 .then(({ data }) => {
-                    console.log(data);
                     if (data.success) {
                         localStorage.setItem("accessToken", data.token);
                         navigate(from, { replace: true });
                     } else {
-                        axios
-                            .post(`http://localhost:5000/login`, userData, {
-                                header: {
-                                    "Access-Control-Allow-Origin": "*",
-                                    "Access-Control-Allow-Methods": "*",
-                                },
-                            })
-                            .then(({ data }) => {
-                                if (data.success) {
-                                    localStorage.setItem(
-                                        "accessToken",
-                                        data.token
-                                    );
-                                    navigate(from, { replace: true });
-                                } else {
-                                    toast.error(data?.message);
-                                    signOut(auth);
-                                }
-                            });
+                        toast.error(data?.message);
+                        signOut(auth);
                     }
                 });
         } else {
@@ -91,7 +72,6 @@ const Login = () => {
             email: user1?.email,
             name: user1?.displayName,
         };
-        console.log({ userData });
         signInWithGoogle();
         axios
             .post(`http://localhost:5000/user`, userData, {

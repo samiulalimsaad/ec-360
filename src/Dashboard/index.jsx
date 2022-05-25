@@ -21,6 +21,7 @@ const Dashboard = () => {
                     <ul className="p-4 overflow-y-auto menu w-80 bg-sky-100 text-base-content">
                         <li>
                             <NavLink
+                                end
                                 className={({ isActive }) =>
                                     isActive ? "bg-base-300 font-semibold" : ""
                                 }
