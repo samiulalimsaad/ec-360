@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
-import PaymentForm from "../PaymentForm";
 import apiClient from "../utilities/axios";
 import Loading from "../utilities/Loading";
 import useTitle from "../utilities/useTitle";
@@ -17,8 +17,23 @@ const Purchase = () => {
         "purchase",
         async () => (await apiClient(`/products/${id}`)).data
     );
-    const [min, setMin] = useState(0);
-    const [transactionId, setTransactionId] = useState("");
+    const [quantity, setQuantity] = useState(0);
+
+    const orderNow = async () => {
+        try {
+            const { data: prod } = await apiClient.patch(
+                `/orders?email=${user?.email}`,
+                {
+                    productId: data?.product?._id,
+                }
+            );
+            if (prod.success) {
+                toast.success("order completed. Got dashboard to pay.");
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
+    };
 
     if (isLoading) return <Loading />;
 
@@ -117,27 +132,21 @@ const Purchase = () => {
                                     min={data?.product?.minOrderQuantity}
                                     max={data?.product?.availableQuantity}
                                     value={
-                                        min || data?.product?.minOrderQuantity
+                                        quantity ||
+                                        data?.product?.minOrderQuantity
                                     }
-                                    onChange={(e) => setMin(e.target.value)}
+                                    onChange={(e) =>
+                                        setQuantity(e.target.value)
+                                    }
                                 />
                             </div>
-                        </fieldset>
-                        <fieldset className="p-6 border rounded border-base-900">
-                            <legend className="text-xl font-semibold text-slate-900">
-                                Payment Information:
-                            </legend>
-                            <div className="my-2">
-                                {transactionId && (
-                                    <div className="my-4 text-success">
-                                        <span className="font-semibold">
-                                            Transaction Id : {transactionId}
-                                        </span>
-                                    </div>
-                                )}
-                                <PaymentForm
-                                    setTransactionId={setTransactionId}
-                                />
+                            <div className="my-4 form-control">
+                                <button
+                                    className="btn btn-accent"
+                                    onClick={orderNow}
+                                >
+                                    Order Now
+                                </button>
                             </div>
                         </fieldset>
                     </div>
