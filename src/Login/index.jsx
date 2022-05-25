@@ -37,19 +37,37 @@ const Login = () => {
                 name: user1?.displayName,
             };
             axios
-                .post(`http://localhost:5000/login`, userData, {
+                .post(`http://localhost:5000/user`, userData, {
                     header: {
                         "Access-Control-Allow-Origin": "*",
                         "Access-Control-Allow-Methods": "*",
                     },
                 })
                 .then(({ data }) => {
+                    console.log(data);
                     if (data.success) {
                         localStorage.setItem("accessToken", data.token);
                         navigate(from, { replace: true });
                     } else {
-                        toast.error(data?.message);
-                        signOut(auth);
+                        axios
+                            .post(`http://localhost:5000/login`, userData, {
+                                header: {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Access-Control-Allow-Methods": "*",
+                                },
+                            })
+                            .then(({ data }) => {
+                                if (data.success) {
+                                    localStorage.setItem(
+                                        "accessToken",
+                                        data.token
+                                    );
+                                    navigate(from, { replace: true });
+                                } else {
+                                    toast.error(data?.message);
+                                    signOut(auth);
+                                }
+                            });
                     }
                 });
         } else {
@@ -57,37 +75,15 @@ const Login = () => {
         }
     }, [user, user1, userGoogle]);
 
-    const signIn = (e) => {
-        e.preventDefault();
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        if (email && password) {
-            signInWithEmailAndPassword(email, password);
+    const signIn = (values) => {
+        if (values) {
+            signInWithEmailAndPassword(values.email, values.password);
         }
     };
 
     const signInGoogle = (e) => {
         e.preventDefault();
-        const userData = {
-            email: user1?.email,
-            name: user1?.displayName,
-        };
         signInWithGoogle();
-        axios
-            .post(`http://localhost:5000/user`, userData, {
-                header: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "*",
-                },
-            })
-            .then(({ data }) => {
-                if (data.success) {
-                    localStorage.setItem("accessToken", data.token);
-                    navigate(from, { replace: true });
-                } else {
-                    signOut(auth);
-                }
-            });
     };
 
     return (
@@ -99,10 +95,7 @@ const Login = () => {
                     initialValues={{ email: "", password: "" }}
                 >
                     {({ isSubmitting }) => (
-                        <Form
-                            className="p-4 px-8 pt-6 pb-8 mb-4 bg-white border rounded-md shadow-md border-slate-500"
-                            onSubmit={signIn}
-                        >
+                        <Form className="p-4 px-8 pt-6 pb-8 mb-4 bg-white border rounded-md shadow-md border-slate-500">
                             {(error || errorGoogle || errorPass) && (
                                 <p className="p-4 mb-4 bg-red-200 rounded-md">
                                     {error?.message ||
@@ -110,10 +103,10 @@ const Login = () => {
                                         errorPass?.message}
                                 </p>
                             )}
-                            <div className="mb-4">
+                            <div className="mb-4 form-control">
                                 <label
                                     className="block mb-2 text-sm font-bold text-slate-700"
-                                    htmlFor="username"
+                                    htmlFor="email"
                                 >
                                     Email
                                 </label>
@@ -131,7 +124,7 @@ const Login = () => {
                                     component="div"
                                 />
                             </div>
-                            <div className="mb-6">
+                            <div className="mb-6 form-control">
                                 <label
                                     className="block mb-2 text-sm font-bold text-slate-700"
                                     htmlFor="password"
