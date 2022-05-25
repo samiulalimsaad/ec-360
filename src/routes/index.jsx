@@ -1,7 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import NotFound from "../404/NotFound";
 import Dashboard from "../Dashboard";
+import AddProduct from "../Dashboard/AddProduct";
 import AddReview from "../Dashboard/AddReview";
+import MakeAdmin from "../Dashboard/MakeAdmin";
+import ManageProduct from "../Dashboard/ManageProduct";
 import Orders from "../Dashboard/Orders";
 import Profile from "../Dashboard/Profile";
 import Home from "../Home";
@@ -34,6 +37,8 @@ const RouteNames = () => {
                 }
             >
                 <Route index element={<Profile />} />
+                <Route path="my-orders" element={<Orders />} />
+                <Route path="add-review" element={<AddReview />} />
                 <Route
                     path="orders"
                     element={
@@ -43,10 +48,26 @@ const RouteNames = () => {
                     }
                 />
                 <Route
-                    path="add-review"
+                    path="add-product"
                     element={
                         <DashboardProtected>
-                            <AddReview />
+                            <AddProduct />
+                        </DashboardProtected>
+                    }
+                />
+                <Route
+                    path="manage-products"
+                    element={
+                        <dashboardProtected>
+                            <ManageProduct />
+                        </dashboardProtected>
+                    }
+                />
+                <Route
+                    path="make-admin"
+                    element={
+                        <DashboardProtected>
+                            <MakeAdmin />
                         </DashboardProtected>
                     }
                 />

@@ -13,8 +13,6 @@ const DashboardProtected = ({ children }) => {
         async () => (await apiClient(`/user?email=${user?.email}`)).data
     );
 
-    console.log({ data });
-
     if (data?.user?.role !== "admin") {
         return <Navigate to="/dashboard" state={{ from: location }} replace />;
     }
