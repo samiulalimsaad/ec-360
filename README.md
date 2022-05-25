@@ -13,4 +13,4 @@ Live Server Site: <https://ec-360.herokuapp.com>
 
 email : admin@admin.com
 
-password : admin
+password : adminadmin
