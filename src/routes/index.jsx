@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import NotFound from "../404/NotFound";
+import AllReviews from "../AllReviews";
 import Dashboard from "../Dashboard";
 import AddProduct from "../Dashboard/AddProduct";
 import AddReview from "../Dashboard/AddReview";
@@ -25,6 +26,7 @@ const RouteNames = () => {
             <Route path="signup" element={<Signup />} />
             <Route path="payment/:id" element={<Payment />} />
             <Route path="portfolio" element={<Portfolio />} />
+            <Route path="/all-reviews" element={<AllReviews />} />
             <Route
                 path="purchase/:id"
                 element={

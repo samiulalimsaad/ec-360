@@ -16,7 +16,6 @@ const Orders = () => {
         ["make-admin"],
         async () => (await apiClient("/orders")).data
     );
-    console.log({ error });
 
     const deleteProduct = async (id) => {
         try {

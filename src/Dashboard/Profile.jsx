@@ -43,7 +43,7 @@ const Profile = () => {
         <div>
             <div className="min-h-screen p-10 hero bg-base-200">
                 <h2>Profile</h2>
-                <div className="w-full shadow-2xl card bg-base-100">
+                <div className="w-full overflow-x-scroll shadow-2xl card bg-base-100">
                     <Formik onSubmit={updateUser} initialValues={initialValues}>
                         {({ isSubmitting }) => (
                             <Form className="flex-row justify-between gap-4 card-body">

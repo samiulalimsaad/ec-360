@@ -6,6 +6,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import React from "react";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const stripePromise = loadStripe(process.env.VITE_card_key);
@@ -13,6 +14,7 @@ const stripePromise = loadStripe(process.env.VITE_card_key);
 const CheckoutForm = ({ setTransactionId }) => {
     const stripe = useStripe();
     const elements = useElements();
+    const id = useParams();
 
     const handleSubmit = async (event) => {
         // Block native form submission.

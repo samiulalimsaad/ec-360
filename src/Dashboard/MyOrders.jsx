@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import { auth } from "../firebase.init";
 import apiClient from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
@@ -49,12 +50,13 @@ const MyOrders = () => {
                                         </button>
                                     ) : (
                                         <div className="flex gap-2">
-                                            <button
+                                            <Link
+                                                to={`/payment/${v._id}`}
                                                 className="btn btn-success"
                                                 // onClick={() => makeAdmin(v._id)}
                                             >
                                                 pay now
-                                            </button>
+                                            </Link>
                                             <label
                                                 htmlFor="Cancel-Modal"
                                                 class="btn btn-warning"
