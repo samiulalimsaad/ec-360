@@ -23,7 +23,7 @@ const RouteNames = () => {
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
-            <Route path="payment" element={<Payment />} />
+            <Route path="payment/:id" element={<Payment />} />
             <Route path="portfolio" element={<Portfolio />} />
             <Route
                 path="purchase/:id"

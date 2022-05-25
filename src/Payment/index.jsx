@@ -14,7 +14,7 @@ const Payment = () => {
     const { id } = useParams();
 
     const { isLoading, error, data } = useQuery(
-        "purchase",
+        ["purchase", id],
         async () => (await apiClient(`/products/${id}`)).data
     );
     const [min, setMin] = useState(0);
