@@ -1,7 +1,23 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useQuery } from "react-query";
 import { NavLink, Outlet } from "react-router-dom";
+import { auth } from "../firebase.init";
+import apiClient from "../utilities/axios";
+import Loading from "../utilities/Loading";
+import AdminNavItems from "./AdminNavItems";
+import UsersNavItems from "./UsersNavItems";
 
 const Dashboard = () => {
+    const [user, loading] = useAuthState(auth);
+
+    const { isLoading, error, data } = useQuery(
+        ["Profile", user],
+        async () => (await apiClient(`/user?email=${user?.email}`)).data
+    );
+
+    if (isLoading || loading) return <Loading />;
+
     return (
         <section>
             <div className="drawer drawer-mobile">
@@ -30,26 +46,11 @@ const Dashboard = () => {
                                 My Profile
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink
-                                className={({ isActive }) =>
-                                    isActive ? "bg-base-300 font-semibold" : ""
-                                }
-                                to="/dashboard/orders"
-                            >
-                                My Orders
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                className={({ isActive }) =>
-                                    isActive ? "bg-base-300 font-semibold" : ""
-                                }
-                                to="/dashboard/add-review"
-                            >
-                                Add a Review
-                            </NavLink>
-                        </li>
+                        {data?.user?.role === "admin" ? (
+                            <AdminNavItems />
+                        ) : (
+                            <UsersNavItems />
+                        )}
                     </ul>
                 </div>
             </div>
