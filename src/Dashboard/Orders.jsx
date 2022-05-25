@@ -17,6 +17,7 @@ const Orders = () => {
         async () => (await apiClient("/orders")).data
     );
     console.log({ error });
+
     const deleteProduct = async (id) => {
         try {
             const { data: updatedUser } = await apiClient.patch(`/user/${id}`, {

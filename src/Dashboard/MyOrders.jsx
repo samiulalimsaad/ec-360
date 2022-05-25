@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import { auth } from "../firebase.init";
-import apiClient from "../utilities/axios";
+import apiClient from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
 import useTitle from "../utilities/useTitle";
 import CancelModal from "./CancelModal";
 
 const MyOrders = () => {
     useTitle("My Order | Dashboard");
+
+    const [productId, setProductId] = useState("");
 
     const [user, loading, userError] = useAuthState(auth);
 
@@ -42,10 +44,7 @@ const MyOrders = () => {
                                 <td>{v.quantity || ""}</td>
                                 <td>
                                     {v.paid ? (
-                                        <button
-                                            className="btn btn-ghost text-success"
-                                            onClick={() => revokeAdmin(v._id)}
-                                        >
+                                        <button className="btn btn-ghost text-success">
                                             Paid
                                         </button>
                                     ) : (
@@ -57,8 +56,11 @@ const MyOrders = () => {
                                                 pay now
                                             </button>
                                             <label
-                                                for="Cancel-Modal"
+                                                htmlFor="Cancel-Modal"
                                                 class="btn btn-warning"
+                                                onClick={() =>
+                                                    setProductId(v._id)
+                                                }
                                             >
                                                 Cancel
                                             </label>
