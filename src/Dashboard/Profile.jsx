@@ -2,6 +2,7 @@ import { Field, Form, Formik } from "formik";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
+import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
 import apiClient from "../utilities/axios";
 import Loading from "../utilities/Loading";
@@ -13,25 +14,32 @@ const Profile = () => {
 
     const { isLoading, error, data } = useQuery(
         ["Profile", user],
-        async () => (await apiClient(`/user?email=${user?.email || ""}`)).data
+        async () => (await apiClient(`/user?email=${user?.email}`)).data
     );
-
-    console.log(user?.email);
-    const updateUser = (values) => {
-        console.log(values);
-    };
-
     console.log(data);
+    const updateUser = async (values) => {
+        console.log(values);
+        try {
+            const profile = await apiClient.patch(
+                `/user/${data?.user?._id}`,
+                values
+            );
+            toast.success(profile.data.message);
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message);
+        }
+    };
 
     if (isLoading || loading) return <Loading />;
 
     const initialValues = {
         email: user?.email,
         name: user?.displayName,
-        education: "",
-        address: "",
-        phone: "",
-        linkedin: "",
+        education: data?.user?.education || "",
+        address: data?.user?.address || "",
+        phone: data?.user?.phone || "",
+        linkedin: data?.user?.linkedin || "",
     };
 
     return (
