@@ -12,15 +12,20 @@ const Tools = () => {
     return (
         <section id="explore" className="container px-4 py-20 mx-auto">
             <h2 className="my-5 text-5xl text-center">Tools</h2>
-            <div className="grid items-center grid-cols-1 gap-5 justify-evenly sm:grid-cols-2 md:grid-cols-3">
+            <div className="grid items-center h-full grid-cols-1 gap-5 justify-evenly sm:grid-cols-2 md:grid-cols-3">
                 {data?.products?.map((v) => (
                     <div
                         key={v._id}
-                        className="shadow-xl card card-compact bg-base-100 justify-self-center"
+                        className="w-full h-full shadow-xl card card-compact bg-base-100 justify-self-center "
                     >
-                        <figure>
+                        <figure className="overflow-hidden">
                             <img
-                                src="https://api.lorem.space/image/shoes?w=400&h=225"
+                                className="duration-200 hover:scale-110"
+                                src={
+                                    v?.image
+                                        ? v.image
+                                        : "https://api.lorem.space/image/shoes?w=400&h=225"
+                                }
                                 alt="Shoes"
                             />
                         </figure>
