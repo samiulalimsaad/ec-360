@@ -1,6 +1,8 @@
 import React from "react";
+import useTitle from "../utilities/useTitle";
 
 const CancelModal = ({ id }) => {
+    useTitle("Cancel Order | Dashboard");
     return (
         <div>
             <label for="Cancel-Modal" class="btn modal-button">

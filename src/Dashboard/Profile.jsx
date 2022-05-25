@@ -9,7 +9,7 @@ import Loading from "../utilities/Loading";
 import useTitle from "../utilities/useTitle";
 
 const Profile = () => {
-    useTitle("Profile");
+    useTitle("Profile | Dashboard");
     const [user, loading, userError] = useAuthState(auth);
 
     const { isLoading, error, data } = useQuery(

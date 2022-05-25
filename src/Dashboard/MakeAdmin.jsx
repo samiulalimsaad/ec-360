@@ -5,8 +5,11 @@ import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
 import apiClient from "../utilities/axios";
 import Loading from "../utilities/Loading";
+import useTitle from "../utilities/useTitle";
 
 const MakeAdmin = () => {
+    useTitle("Users | Dashboard");
+
     const [user, loading] = useAuthState(auth);
 
     const { isLoading, error, data, refetch } = useQuery(

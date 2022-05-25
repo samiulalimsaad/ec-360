@@ -11,6 +11,7 @@ import Profile from "../Dashboard/Profile";
 import Home from "../Home";
 import Login from "../Login";
 import Payment from "../Payment";
+import Portfolio from "../Portfolio";
 import Purchase from "../Purchase";
 import Signup from "../Signup";
 import DashboardProtected from "../utilities/DashboardProtected";
@@ -23,6 +24,7 @@ const RouteNames = () => {
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
             <Route path="payment" element={<Payment />} />
+            <Route path="portfolio" element={<Portfolio />} />
             <Route
                 path="purchase/:id"
                 element={

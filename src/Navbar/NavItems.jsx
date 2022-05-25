@@ -17,6 +17,10 @@ const items = [
         name: "dashboard",
         path: "/dashboard",
     },
+    {
+        name: "portfolio",
+        path: "/portfolio",
+    },
 ];
 
 const NavItems = () => {
