@@ -6,7 +6,7 @@ const PrivateRoute = ({ children }) => {
     const location = useLocation();
     const [user, loading] = useAuthState(auth);
 
-    if ((!user || !user?.emailVerified) && !loading) {
+    if (!user?.email && !loading) {
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
 
