@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
-import apiClient from "../utilities/axios";
+import apiClient from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
 import useTitle from "../utilities/useTitle";
 
@@ -14,18 +14,19 @@ const Purchase = () => {
     const { id } = useParams();
 
     const { isLoading, error, data } = useQuery(
-        ["purchase", user],
+        ["purchase", id],
         async () => (await apiClient(`/products/${id}`)).data
     );
     const [quantity, setQuantity] = useState(0);
 
+    console.log({ data });
     useEffect(() => {
         setQuantity(data?.product?.minOrderQuantity);
     }, [data]);
 
     const orderNow = async () => {
         try {
-            const { data: prod } = await apiClient.patch(
+            const { data: prod } = await apiClient.post(
                 `/orders?email=${user?.email}`,
                 {
                     ...data?.product,
@@ -33,7 +34,7 @@ const Purchase = () => {
                 }
             );
             if (prod.success) {
-                toast.success("order completed. Got dashboard to pay.");
+                toast.success("order completed. Go dashboard to pay.");
             }
         } catch (error) {
             toast.error(error.message);

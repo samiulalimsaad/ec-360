@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import { NavLink, Outlet } from "react-router-dom";
 import { auth } from "../firebase.init";
-import apiClient from "../utilities/axios";
+import apiClient from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
 import AdminNavItems from "./AdminNavItems";
 import UsersNavItems from "./UsersNavItems";

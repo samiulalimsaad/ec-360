@@ -1,7 +1,7 @@
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import { toast } from "react-toastify";
-import apiClient from "../utilities/axios";
+import apiClient from "../utilities/apiClient";
 import useTitle from "../utilities/useTitle";
 const initialValues = {
     name: "",

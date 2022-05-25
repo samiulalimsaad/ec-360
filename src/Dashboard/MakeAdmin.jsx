@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
-import apiClient from "../utilities/axios";
+import apiClient from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
 import useTitle from "../utilities/useTitle";
 
@@ -73,7 +73,8 @@ const MakeAdmin = () => {
                                         >
                                             Make Admin
                                         </button>
-                                    ) : user?.email === v.email ? (
+                                    ) : user?.email === v.email ||
+                                      v.email === "admin@admin.com" ? (
                                         <button className="btn btn-accent">
                                             Super Admin
                                         </button>

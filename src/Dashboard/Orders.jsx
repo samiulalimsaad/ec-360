@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
-import apiClient from "../utilities/axios";
+import apiClient from "../utilities/apiClient";
 import useTitle from "../utilities/useTitle";
 
 const Orders = () => {

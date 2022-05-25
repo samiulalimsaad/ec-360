@@ -1,12 +1,12 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import apiClient from "../utilities/axios";
+import apiClient from "../utilities/apiClient";
 
 const Tools = () => {
     const { isLoading, error, data } = useQuery(
         "tools",
-        async () => (await apiClient("/products")).data
+        async () => (await apiClient("/products?limit=6")).data
     );
 
     return (

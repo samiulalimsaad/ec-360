@@ -63,9 +63,9 @@ const RouteNames = () => {
                 <Route
                     path="manage-products"
                     element={
-                        <dashboardProtected>
+                        <DashboardProtected>
                             <ManageProduct />
-                        </dashboardProtected>
+                        </DashboardProtected>
                     }
                 />
                 <Route

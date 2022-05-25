@@ -2,7 +2,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import { Navigate, useLocation } from "react-router-dom";
 import { auth } from "../firebase.init";
-import apiClient from "./axios";
+import apiClient from "./apiClient";
 
 const DashboardProtected = ({ children }) => {
     const location = useLocation();

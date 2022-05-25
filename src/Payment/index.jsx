@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { auth } from "../firebase.init";
 import PaymentForm from "../PaymentForm";
-import apiClient from "../utilities/axios";
+import apiClient from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
 import useTitle from "../utilities/useTitle";
 
