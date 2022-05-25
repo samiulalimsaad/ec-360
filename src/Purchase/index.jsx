@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
@@ -14,17 +14,22 @@ const Purchase = () => {
     const { id } = useParams();
 
     const { isLoading, error, data } = useQuery(
-        "purchase",
+        ["purchase", user],
         async () => (await apiClient(`/products/${id}`)).data
     );
     const [quantity, setQuantity] = useState(0);
+
+    useEffect(() => {
+        setQuantity(data?.product?.minOrderQuantity);
+    }, [data]);
 
     const orderNow = async () => {
         try {
             const { data: prod } = await apiClient.patch(
                 `/orders?email=${user?.email}`,
                 {
-                    productId: data?.product?._id,
+                    ...data?.product,
+                    quantity,
                 }
             );
             if (prod.success) {
