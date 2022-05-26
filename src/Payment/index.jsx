@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useParams } from "react-router-dom";
 import { auth } from "../firebase.init";
-import PaymentForm from "../PaymentForm";
 import Loading from "../utilities/Loading";
 import useFetch from "../utilities/useFetch";
 import useTitle from "../utilities/useTitle";
+import PaymentForm from "./PaymentForm";
 
 const Payment = () => {
     useTitle("Payment");

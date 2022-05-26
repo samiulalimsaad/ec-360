@@ -10,8 +10,8 @@ import { signOut } from "firebase/auth";
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { auth } from "../firebase.init";
-import { GET_URL } from "../utilities/apiClient";
+import { auth } from "../../firebase.init";
+import { GET_URL } from "../../utilities/apiClient";
 
 const stripePromise = loadStripe(process.env.VITE_card_key);
 

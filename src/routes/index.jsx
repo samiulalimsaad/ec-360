@@ -10,6 +10,7 @@ import ManageProduct from "../Dashboard/ManageProduct";
 import MyOrders from "../Dashboard/MyOrders";
 import Profile from "../Dashboard/Profile";
 import Home from "../Home";
+import AllProducts from "../Home/Products/AllProducts";
 import AllReviews from "../Home/Reviews/AllReviews";
 import Login from "../Login";
 import Payment from "../Payment";
@@ -26,6 +27,7 @@ const RouteNames = () => {
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
             <Route path="portfolio" element={<Portfolio />} />
+            <Route path="all-products" element={<AllProducts />} />
             <Route path="blogs" element={<Blogs />} />
             <Route path="all-reviews" element={<AllReviews />} />
             <Route

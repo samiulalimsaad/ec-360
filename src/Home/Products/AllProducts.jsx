@@ -3,18 +3,20 @@ import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import apiClient from "../../utilities/apiClient";
 import Loading from "../../utilities/Loading";
+import useTitle from "../../utilities/useTitle";
 
-const Tools = () => {
+const AllProducts = () => {
+    useTitle("All Products");
     const { isLoading, error, data } = useQuery(
-        "tools",
-        async () => (await apiClient("/products?limit=6")).data
+        "AllProducts",
+        async () => (await apiClient("/products")).data
     );
 
     if (isLoading) return <Loading />;
 
     return (
         <section id="explore" className="container px-4 py-20 mx-auto">
-            <h2 className="my-5 text-5xl text-center">Tools</h2>
+            <h2 className="my-5 text-5xl text-center">AllProducts</h2>
             <div className="grid items-center h-full grid-cols-1 gap-5 justify-evenly sm:grid-cols-2 md:grid-cols-3">
                 {data?.products?.map((v) => (
                     <div
@@ -47,7 +49,7 @@ const Tools = () => {
                             <div className="justify-center card-actions">
                                 <Link
                                     to={`/purchase/${v._id}`}
-                                    className="btn btn-ghost"
+                                    className="w-full btn btn-info"
                                 >
                                     Buy Now
                                 </Link>
@@ -60,4 +62,4 @@ const Tools = () => {
     );
 };
 
-export default Tools;
+export default AllProducts;

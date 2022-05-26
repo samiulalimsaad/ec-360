@@ -3,9 +3,9 @@ import useTitle from "../utilities/useTitle";
 import Banner from "./Banner";
 import MemberNow from "./MemberNow";
 import Newsletter from "./Newsletter";
+import Products from "./Products";
 import Reviews from "./Reviews";
 import Summary from "./Summary";
-import Tools from "./Tools";
 
 const Home = () => {
     useTitle("Home");
@@ -14,7 +14,7 @@ const Home = () => {
             <Banner />
             <Summary />
             <div className="divider" />
-            <Tools />
+            <Products />
             <div className="divider" />
             <Reviews />
             <Newsletter />

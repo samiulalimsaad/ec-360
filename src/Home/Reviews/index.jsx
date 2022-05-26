@@ -15,39 +15,21 @@ const Reviews = () => {
     return (
         <section className="container py-20 mx-auto">
             <h2 className="mb-10 text-4xl text-center">Reviews</h2>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
                 {data?.review?.map((v, i) => (
                     <div key={i} className="shadow-xl card bg-base-100">
                         <div className="card-body">
                             <h2 className="card-title">{v.name}</h2>
-                            <p>{v.description}</p>
+                            <p className="line-clamp-6">{v.description}</p>
                             <div className="card-actions">
                                 <div className="rating">
-                                    <input
-                                        type="radio"
-                                        name="rating-2"
-                                        className="bg-orange-400 mask mask-star-2"
-                                    />
-                                    <input
-                                        type="radio"
-                                        name="rating-2"
-                                        className="bg-orange-400 mask mask-star-2"
-                                    />
-                                    <input
-                                        type="radio"
-                                        name="rating-2"
-                                        className="bg-orange-400 mask mask-star-2"
-                                    />
-                                    <input
-                                        type="radio"
-                                        name="rating-2"
-                                        className="bg-orange-400 mask mask-star-2"
-                                    />
-                                    <input
-                                        type="radio"
-                                        name="rating-2"
-                                        className="bg-orange-400 mask mask-star-2"
-                                    />
+                                    {new Array(v.rating).fill(
+                                        <input
+                                            type="radio"
+                                            name="rating-2"
+                                            className="bg-orange-400 mask mask-star-2"
+                                        />
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -55,7 +37,7 @@ const Reviews = () => {
                 ))}
             </div>
             <div className="flex items-center justify-center my-4">
-                <Link className="btn btn-info" to="/all-reviews">
+                <Link className="btn btn-success" to="/all-reviews">
                     All Reviews
                 </Link>
             </div>
