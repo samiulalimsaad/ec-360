@@ -25,7 +25,12 @@ const Purchase = () => {
     }, [data]);
 
     const orderNow = async () => {
-        const payload = { ...data?.product, quantity };
+        const payload = {
+            ...data?.product,
+            quantity,
+            paid: false,
+            status: "processing",
+        };
         delete payload["_id"];
         try {
             const { data: prod } = await apiClient.post(`/orders`, payload);

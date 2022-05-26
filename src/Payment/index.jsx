@@ -15,7 +15,7 @@ const Payment = () => {
 
     const { isLoading, error, data } = useQuery(
         ["purchase", id],
-        async () => (await apiClient(`/products/${id}`)).data
+        async () => (await apiClient(`/orders/${id}`)).data
     );
     const [min, setMin] = useState(0);
     const [transactionId, setTransactionId] = useState("");
@@ -66,7 +66,7 @@ const Payment = () => {
                                 <input
                                     type="text"
                                     className="input input-bordered"
-                                    value={data?.product?.name || ""}
+                                    value={data?.orders?.name || ""}
                                     disabled
                                 />
                             </div>
@@ -77,33 +77,7 @@ const Payment = () => {
                                 <input
                                     type="text"
                                     className="input input-bordered"
-                                    value={data?.product?.price || ""}
-                                    disabled
-                                />
-                            </div>
-                            <div className="form-control">
-                                <label className="label label-text">
-                                    Min Order
-                                </label>
-                                <input
-                                    type="text"
-                                    className="input input-bordered"
-                                    value={
-                                        data?.product?.minOrderQuantity || ""
-                                    }
-                                    disabled
-                                />
-                            </div>
-                            <div className="form-control">
-                                <label className="label label-text">
-                                    Available
-                                </label>
-                                <input
-                                    type="text"
-                                    className="input input-bordered"
-                                    value={
-                                        data?.product?.availableQuantity || ""
-                                    }
+                                    value={data?.orders?.price || ""}
                                     disabled
                                 />
                             </div>
@@ -114,12 +88,8 @@ const Payment = () => {
                                 <input
                                     type="number"
                                     className="input input-bordered input-accent"
-                                    min={data?.product?.minOrderQuantity}
-                                    max={data?.product?.availableQuantity}
-                                    value={
-                                        min || data?.product?.minOrderQuantity
-                                    }
-                                    onChange={(e) => setMin(e.target.value)}
+                                    value={data?.orders?.quantity}
+                                    disabled
                                 />
                             </div>
                         </fieldset>

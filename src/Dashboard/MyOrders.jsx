@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
 import apiClient from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
@@ -15,10 +16,22 @@ const MyOrders = () => {
 
     const [user, loading, userError] = useAuthState(auth);
 
-    const { isLoading, error, data } = useQuery(
+    const { isLoading, error, data, refetch } = useQuery(
         ["my-orders", user],
-        async () => (await apiClient(`/orders/${user?.email}`)).data
+        async () => (await apiClient(`/my-orders/${user?.email}`)).data
     );
+
+    const cancelProduct = async () => {
+        try {
+            const { data } = await apiClient.delete(`/orders/${productId}`);
+            if (data.success) {
+                toast.success("Order Canceled Successfully");
+                refetch();
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
+    };
 
     if (isLoading || loading) return <Loading />;
 
@@ -34,6 +47,7 @@ const MyOrders = () => {
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,6 +57,7 @@ const MyOrders = () => {
                                 <td>{v.name}</td>
                                 <td>{v.price}</td>
                                 <td>{v.quantity || ""}</td>
+                                <td>{v.status || ""}</td>
                                 <td>
                                     {v.paid ? (
                                         <button className="btn btn-ghost text-success">
@@ -59,7 +74,7 @@ const MyOrders = () => {
                                             </Link>
                                             <label
                                                 htmlFor="Cancel-Modal"
-                                                class="btn btn-warning"
+                                                className="btn btn-warning"
                                                 onClick={() =>
                                                     setProductId(v._id)
                                                 }
@@ -74,7 +89,7 @@ const MyOrders = () => {
                     </tbody>
                 </table>
             </div>
-            <CancelModal />
+            <CancelModal callback={cancelProduct} />
         </div>
     );
 };

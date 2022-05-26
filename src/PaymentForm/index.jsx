@@ -8,13 +8,16 @@ import { loadStripe } from "@stripe/stripe-js";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import apiClient from "../utilities/apiClient";
 
 const stripePromise = loadStripe(process.env.VITE_card_key);
 
 const CheckoutForm = ({ setTransactionId }) => {
     const stripe = useStripe();
     const elements = useElements();
-    const id = useParams();
+    const { id } = useParams();
+
+    console.log({ id });
 
     const handleSubmit = async (event) => {
         // Block native form submission.
@@ -44,8 +47,19 @@ const CheckoutForm = ({ setTransactionId }) => {
         if (error) {
             toast.error(error.message);
         } else {
-            toast.success("Payment successful");
-            setTransactionId(paymentMethod.id);
+            try {
+                const { data } = await apiClient.patch(`/orders/${id}`, {
+                    paid: true,
+                    status: "shipped",
+                });
+                console.log({ data });
+                if (data.success) {
+                    toast.success("Payment successful");
+                    setTransactionId(paymentMethod.id);
+                }
+            } catch (error) {
+                toast.error(error.message);
+            }
         }
     };
 
