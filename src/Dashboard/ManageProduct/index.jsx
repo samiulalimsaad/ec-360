@@ -57,7 +57,7 @@ const ManageProduct = () => {
                                 <td>{v.name}</td>
                                 <td>{v.price}</td>
                                 <td>
-                                    <figure className="overflow-hidden">
+                                    <figure className="w-40 h-full overflow-hidden">
                                         <img
                                             className="duration-200 hover:scale-110"
                                             src={v?.image}
