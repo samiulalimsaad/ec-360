@@ -13,7 +13,6 @@ const DashboardProtected = ({ children }) => {
         user
     );
 
-    console.log({ data });
     if (loading || isLoading) {
         return <Loading />;
     }

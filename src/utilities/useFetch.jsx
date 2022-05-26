@@ -25,7 +25,6 @@ const useFetch = (path, dependencies) => {
                 },
             })
             .then((res) => {
-                console.log({ res });
                 if (res?.data.success) {
                     setData(res.data);
                 } else {

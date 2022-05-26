@@ -41,7 +41,6 @@ const Profile = () => {
 
     if (isLoading || loading) return <Loading />;
 
-    console.log(data);
     const initialValues = {
         email: user?.email,
         name: user?.displayName,

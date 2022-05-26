@@ -25,7 +25,6 @@ const AddReview = () => {
                 },
             });
 
-            console.log(data);
             if (data.success) {
                 toast.success("Review Added Successfully");
                 resetForm();

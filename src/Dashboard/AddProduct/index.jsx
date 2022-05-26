@@ -18,7 +18,7 @@ const initialValues = {
 const AddProduct = () => {
     useTitle("add a Product | Dashboard");
 
-    const uploadProduct = async (values) => {
+    const uploadProduct = async (values, { resetForm }) => {
         values["minOrderQuantity"] = +values["minOrderQuantity"];
         values["availableQuantity"] = +values["availableQuantity"];
         values["price"] = +values["price"];
@@ -31,9 +31,9 @@ const AddProduct = () => {
                     )}`,
                 },
             });
-            console.log(data);
             if (data.success) {
                 toast.success("Product Added Successfully");
+                resetForm();
             }
         } catch (error) {
             if (
