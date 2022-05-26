@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { auth } from "../firebase.init";
 import PaymentForm from "../PaymentForm";
-import apiClient from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
+import useFetch from "../utilities/useFetch";
 import useTitle from "../utilities/useTitle";
 
 const Payment = () => {
@@ -13,10 +12,8 @@ const Payment = () => {
     const [user, loading, userError] = useAuthState(auth);
     const { id } = useParams();
 
-    const { isLoading, error, data } = useQuery(
-        ["purchase", id],
-        async () => (await apiClient(`/orders/${id}`)).data
-    );
+    const { data, isLoading, error } = useFetch(`/orders/${id}`, id);
+
     const [min, setMin] = useState(0);
     const [transactionId, setTransactionId] = useState("");
 

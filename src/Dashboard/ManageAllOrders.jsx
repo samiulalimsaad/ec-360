@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
 import apiClient from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
+import useFetch from "../utilities/useFetch";
 import useTitle from "../utilities/useTitle";
 import CancelModal from "./CancelModal";
 
@@ -15,10 +15,7 @@ const ManageAllOrders = () => {
 
     const [user, loading, userError] = useAuthState(auth);
 
-    const { isLoading, error, data, refetch } = useQuery(
-        ["my-orders", user],
-        async () => (await apiClient(`/orders`)).data
-    );
+    const { data, isLoading, error } = useFetch(`/orders`, user);
 
     const cancelProduct = async () => {
         try {

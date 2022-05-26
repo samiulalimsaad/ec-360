@@ -1,6 +1,5 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
 import apiClient from "../utilities/apiClient";
@@ -12,10 +11,7 @@ const MakeAdmin = () => {
 
     const [user, loading] = useAuthState(auth);
 
-    const { isLoading, error, data, refetch } = useQuery(
-        ["make-admin"],
-        async () => (await apiClient("/all-user")).data
-    );
+    const { data, isLoading, error } = useFetch(`/all-user`, user);
 
     const makeAdmin = async (id) => {
         try {

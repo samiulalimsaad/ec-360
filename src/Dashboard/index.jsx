@@ -1,19 +1,18 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useQuery } from "react-query";
 import { NavLink, Outlet } from "react-router-dom";
 import { auth } from "../firebase.init";
-import apiClient from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
+import useFetch from "../utilities/useFetch";
 import AdminNavItems from "./AdminNavItems";
 import UsersNavItems from "./UsersNavItems";
 
 const Dashboard = () => {
     const [user, loading] = useAuthState(auth);
 
-    const { isLoading, error, data } = useQuery(
-        ["Profile", user],
-        async () => (await apiClient(`/user?email=${user?.email}`)).data
+    const { data, isLoading, error } = useFetch(
+        `/user?email=${user?.email}`,
+        user
     );
 
     if (isLoading || loading) return <Loading />;

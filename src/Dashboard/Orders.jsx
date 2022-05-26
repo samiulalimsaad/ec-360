@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
 import apiClient from "../utilities/apiClient";
@@ -12,10 +11,7 @@ const Orders = () => {
     const [productId, setProductId] = useState("");
     const [user, loading, userError] = useAuthState(auth);
 
-    const { isLoading, error, data, refetch } = useQuery(
-        ["make-admin"],
-        async () => (await apiClient("/orders")).data
-    );
+    const { data, isLoading, error } = useFetch(`/orders`, user);
 
     const deleteProduct = async (id) => {
         try {

@@ -1,12 +1,12 @@
 import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
 import apiClient from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
+import useFetch from "../utilities/useFetch";
 import useTitle from "../utilities/useTitle";
 
 const Purchase = () => {
@@ -14,10 +14,8 @@ const Purchase = () => {
     const [user, loading, userError] = useAuthState(auth);
     const { id } = useParams();
     const location = useNavigate();
-    const { isLoading, error, data } = useQuery(
-        ["purchase", id],
-        async () => (await apiClient(`/products/${id}`)).data
-    );
+    const { data, isLoading, error } = useFetch(`/products/${id}`, id);
+
     const [quantity, setQuantity] = useState(0);
 
     useEffect(() => {

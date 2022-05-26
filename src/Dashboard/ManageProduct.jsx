@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
 import apiClient from "../utilities/apiClient";
+import useFetch from "../utilities/useFetch";
 import useTitle from "../utilities/useTitle";
 import CancelModal from "./CancelModal";
 
@@ -12,10 +12,8 @@ const ManageProduct = () => {
     const [productId, setProductId] = useState("");
     const [user, loading, userError] = useAuthState(auth);
 
-    const { isLoading, error, data, refetch } = useQuery(
-        ["make-admin"],
-        async () => (await apiClient("/products")).data
-    );
+    const { data, isLoading, error } = useFetch(`/products`, user);
+
     const deleteProduct = async () => {
         try {
             const { data: updatedProduct } = await apiClient.delete(

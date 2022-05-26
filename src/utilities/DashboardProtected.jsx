@@ -1,16 +1,15 @@
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useQuery } from "react-query";
 import { Navigate, useLocation } from "react-router-dom";
 import { auth } from "../firebase.init";
-import apiClient from "./apiClient";
+import useFetch from "./useFetch";
 
 const DashboardProtected = ({ children }) => {
     const location = useLocation();
     const [user, loading] = useAuthState(auth);
 
-    const { isLoading, error, data } = useQuery(
-        ["Profile", user],
-        async () => (await apiClient(`/user?email=${user?.email}`)).data
+    const { data, isLoading, error } = useFetch(
+        `/user?email=${user?.email}`,
+        user
     );
 
     if (data?.user?.role !== "admin") {

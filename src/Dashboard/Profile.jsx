@@ -1,21 +1,22 @@
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
 import apiClient from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
+import useFetch from "../utilities/useFetch";
 import useTitle from "../utilities/useTitle";
 
 const Profile = () => {
     useTitle("Profile | Dashboard");
     const [user, loading, userError] = useAuthState(auth);
 
-    const { isLoading, error, data } = useQuery(
-        ["Profile", user],
-        async () => (await apiClient(`/user?email=${user?.email}`)).data
+    const { data, isLoading, error } = useFetch(
+        `/user?email=${user?.email}`,
+        user
     );
+
     const updateUser = async (values) => {
         try {
             const profile = await apiClient.patch(
@@ -30,6 +31,7 @@ const Profile = () => {
 
     if (isLoading || loading) return <Loading />;
 
+    console.log(data);
     const initialValues = {
         email: user?.email,
         name: user?.displayName,

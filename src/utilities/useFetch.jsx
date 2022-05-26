@@ -45,7 +45,7 @@ const useFetch = (path, dependencies) => {
                 setIsLoading(false);
             });
     }, [dependencies]);
-    return [data, isLoading, error];
+    return { data, isLoading, error };
 };
 
 export default useFetch;
