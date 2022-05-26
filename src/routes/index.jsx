@@ -24,9 +24,16 @@ const RouteNames = () => {
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
-            <Route path="payment/:id" element={<Payment />} />
             <Route path="portfolio" element={<Portfolio />} />
             <Route path="/all-reviews" element={<AllReviews />} />
+            <Route
+                path="payment/:id"
+                element={
+                    <PrivateRoute>
+                        <Payment />
+                    </PrivateRoute>
+                }
+            />
             <Route
                 path="purchase/:id"
                 element={

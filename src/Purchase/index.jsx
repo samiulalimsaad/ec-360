@@ -1,7 +1,8 @@
+import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
 import apiClient from "../utilities/apiClient";
@@ -12,14 +13,13 @@ const Purchase = () => {
     useTitle("Purchase");
     const [user, loading, userError] = useAuthState(auth);
     const { id } = useParams();
-
+    const location = useNavigate();
     const { isLoading, error, data } = useQuery(
         ["purchase", id],
         async () => (await apiClient(`/products/${id}`)).data
     );
     const [quantity, setQuantity] = useState(0);
 
-    console.log({ data });
     useEffect(() => {
         setQuantity(data?.product?.minOrderQuantity);
     }, [data]);
@@ -35,11 +35,17 @@ const Purchase = () => {
         try {
             const { data: prod } = await apiClient.post(`/orders`, payload);
 
-            console.log({ prod });
             if (prod.success) {
                 toast.success("order completed. Go dashboard to pay.");
             }
         } catch (error) {
+            if (
+                error.response.status === 401 ||
+                error.response.status === 403
+            ) {
+                signOut(auth);
+                return location("/login");
+            }
             toast.error(error.message);
         }
     };
