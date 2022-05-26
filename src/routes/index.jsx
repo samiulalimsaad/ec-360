@@ -5,9 +5,9 @@ import Dashboard from "../Dashboard";
 import AddProduct from "../Dashboard/AddProduct";
 import AddReview from "../Dashboard/AddReview";
 import MakeAdmin from "../Dashboard/MakeAdmin";
+import ManageAllOrders from "../Dashboard/ManageAllOrders";
 import ManageProduct from "../Dashboard/ManageProduct";
 import MyOrders from "../Dashboard/MyOrders";
-import Orders from "../Dashboard/Orders";
 import Profile from "../Dashboard/Profile";
 import Home from "../Home";
 import Login from "../Login";
@@ -47,10 +47,10 @@ const RouteNames = () => {
                 <Route path="my-orders" element={<MyOrders />} />
                 <Route path="add-review" element={<AddReview />} />
                 <Route
-                    path="orders"
+                    path="manage-all-orders"
                     element={
                         <DashboardProtected>
-                            <Orders />
+                            <ManageAllOrders />
                         </DashboardProtected>
                     }
                 />
