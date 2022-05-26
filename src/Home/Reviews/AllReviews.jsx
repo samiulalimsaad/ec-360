@@ -24,31 +24,13 @@ const AllReviews = () => {
                             <p>{v.description}</p>
                             <div className="card-actions">
                                 <div className="rating">
-                                    <input
-                                        type="radio"
-                                        name="rating-2"
-                                        className="bg-orange-400 mask mask-star-2"
-                                    />
-                                    <input
-                                        type="radio"
-                                        name="rating-2"
-                                        className="bg-orange-400 mask mask-star-2"
-                                    />
-                                    <input
-                                        type="radio"
-                                        name="rating-2"
-                                        className="bg-orange-400 mask mask-star-2"
-                                    />
-                                    <input
-                                        type="radio"
-                                        name="rating-2"
-                                        className="bg-orange-400 mask mask-star-2"
-                                    />
-                                    <input
-                                        type="radio"
-                                        name="rating-2"
-                                        className="bg-orange-400 mask mask-star-2"
-                                    />
+                                    {new Array(v.rating).fill(
+                                        <input
+                                            type="radio"
+                                            name="rating-2"
+                                            className="bg-orange-400 mask mask-star-2"
+                                        />
+                                    )}
                                 </div>
                             </div>
                         </div>
