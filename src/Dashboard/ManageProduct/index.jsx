@@ -38,7 +38,7 @@ const ManageProduct = () => {
     };
 
     return (
-        <div className="p-10">
+        <section className="p-10">
             <div className="overflow-x-auto">
                 <table className="table w-full table-zebra">
                     <thead>
@@ -80,7 +80,7 @@ const ManageProduct = () => {
                 </table>
             </div>
             <CancelModal callback={deleteProduct} />
-        </div>
+        </section>
     );
 };
 

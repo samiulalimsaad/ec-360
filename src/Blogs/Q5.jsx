@@ -18,7 +18,11 @@ const Q5 = () => {
                 description, etc. How will you implement a search to find
                 products by name?
             </h3>
-            <div>const a = products.find((v) => v.name === "name")</div>
+            <div className="flex items-center justify-center">
+                <ul>
+                    <li>const a = products.find((v) => v.name === "name")</li>
+                </ul>
+            </div>
         </div>
     );
 };

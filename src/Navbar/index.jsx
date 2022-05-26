@@ -6,7 +6,7 @@ import NavItems from "./NavItems";
 const Navbar = () => {
     const location = useLocation();
     return (
-        <div className="navbar bg-info text-info-content">
+        <nav className="navbar bg-info text-info-content">
             <div className="flex justify-between w-full sm:navbar-start">
                 <div className="dropdown">
                     <label tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -52,7 +52,7 @@ const Navbar = () => {
                     <NavItems />
                 </ul>
             </div>
-        </div>
+        </nav>
     );
 };
 

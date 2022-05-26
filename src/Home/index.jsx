@@ -10,7 +10,7 @@ import Summary from "./Summary";
 const Home = () => {
     useTitle("Home");
     return (
-        <div>
+        <section>
             <Banner />
             <Summary />
             <div className="divider" />
@@ -19,7 +19,7 @@ const Home = () => {
             <Reviews />
             <Newsletter />
             <MemberNow />
-        </div>
+        </section>
     );
 };
 

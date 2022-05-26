@@ -66,7 +66,7 @@ const Orders = () => {
     };
 
     return (
-        <div className="p-10">
+        <section className="p-10">
             <div className="overflow-x-auto">
                 <table className="table w-full table-zebra">
                     <thead>
@@ -127,7 +127,7 @@ const Orders = () => {
                 </table>
             </div>
             <CancelModal callback={deleteProduct} />
-        </div>
+        </section>
     );
 };
 

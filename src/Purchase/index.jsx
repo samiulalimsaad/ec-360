@@ -63,7 +63,7 @@ const Purchase = () => {
     if (isLoading) return <Loading />;
 
     return (
-        <div>
+        <section>
             <div className="min-h-screen hero bg-base-200">
                 <h2>Purchase</h2>
                 <div className="w-full max-w-xl shadow-2xl card bg-base-100">
@@ -177,7 +177,7 @@ const Purchase = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

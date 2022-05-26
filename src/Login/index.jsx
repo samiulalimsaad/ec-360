@@ -87,7 +87,7 @@ const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center p-4 sm:container sm:p-20">
+        <section className="flex items-center justify-center p-4 sm:container sm:p-20">
             <div className="sm:w-1/3">
                 <Formik
                     onSubmit={signIn}
@@ -178,7 +178,7 @@ const Login = () => {
                     )}
                 </Formik>
             </div>
-        </div>
+        </section>
     );
 };
 

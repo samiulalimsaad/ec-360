@@ -4,7 +4,7 @@ import useTitle from "../../utilities/useTitle";
 const CancelModal = ({ callback }) => {
     useTitle("Cancel Order | Dashboard");
     return (
-        <div>
+        <section>
             <input type="checkbox" id="Cancel-Modal" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box">
@@ -28,7 +28,7 @@ const CancelModal = ({ callback }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

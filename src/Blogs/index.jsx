@@ -10,7 +10,7 @@ import Q6 from "./Q6";
 const Blogs = () => {
     useTitle("Blogs");
     return (
-        <div className="p-10 space-y-8">
+        <section className="p-10 space-y-8">
             <h2 className="text-4xl font-semibold text-center">Blogs</h2>
             <div className="divider"></div>
             <Q1 />
@@ -24,7 +24,7 @@ const Blogs = () => {
             <Q5 />
             <div className="divider"></div>
             <Q6 />
-        </div>
+        </section>
     );
 };
 

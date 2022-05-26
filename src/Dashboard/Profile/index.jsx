@@ -51,7 +51,7 @@ const Profile = () => {
     };
 
     return (
-        <div>
+        <section>
             <div className="min-h-screen p-10 hero bg-base-200">
                 <h2>Profile</h2>
                 <div className="w-full overflow-x-scroll shadow-2xl card bg-base-100">
@@ -144,7 +144,7 @@ const Profile = () => {
                     </Formik>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

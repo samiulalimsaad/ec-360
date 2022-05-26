@@ -20,7 +20,7 @@ const Payment = () => {
     if (isLoading) return <Loading />;
 
     return (
-        <div>
+        <section>
             <div className="min-h-screen hero bg-base-200">
                 <h2>Payment</h2>
                 <div className="w-full max-w-xl shadow-2xl card bg-base-100">
@@ -110,7 +110,7 @@ const Payment = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

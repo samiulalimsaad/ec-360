@@ -8,11 +8,16 @@ const Q4 = () => {
                 you have const [products, setProducts] = useState([]). Why you
                 do not set products = [...] instead, you use the setProducts
             </h3>
-            <p>
-                we never update the state directly because : react do some own
-                task for performance and and if use directly set products =
-                [...] then we would face some un expected behaviors
-            </p>
+            <div className="flex items-center justify-center">
+                <ul className="list-decimal">
+                    <li>
+                        we never update the state directly because : react do
+                        some own task for performance and and if use directly
+                        set products = [...] then we would face some un expected
+                        behaviors
+                    </li>
+                </ul>
+            </div>
         </div>
     );
 };

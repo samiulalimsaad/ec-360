@@ -74,7 +74,7 @@ const Signup = () => {
         }
     };
     return (
-        <div className="flex items-center justify-center p-4 sm:container sm:p-20">
+        <section className="flex items-center justify-center p-4 sm:container sm:p-20">
             <Formik
                 onSubmit={createUser}
                 validationSchema={signUpValidationSchema}
@@ -169,7 +169,7 @@ const Signup = () => {
                     </Form>
                 )}
             </Formik>
-        </div>
+        </section>
     );
 };
 
