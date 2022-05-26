@@ -12,12 +12,16 @@ const initialValues = {
     minOrderQuantity: "",
     availableQuantity: "",
     price: "",
+    description: "",
 };
 
 const AddProduct = () => {
     useTitle("add a Product | Dashboard");
 
     const uploadProduct = async (values) => {
+        values["minOrderQuantity"] = +values["minOrderQuantity"];
+        values["availableQuantity"] = +values["availableQuantity"];
+        values["price"] = +values["price"];
         try {
             const { data } = await axios.post(GET_URL("/product"), values, {
                 headers: {
@@ -27,6 +31,7 @@ const AddProduct = () => {
                     )}`,
                 },
             });
+            console.log(data);
             if (data.success) {
                 toast.success("Product Added Successfully");
             }
@@ -104,6 +109,16 @@ const AddProduct = () => {
                                         <Field
                                             type="text"
                                             name="image"
+                                            className="input input-bordered"
+                                        />
+                                    </div>
+                                    <div className="form-control">
+                                        <label className="label label-text">
+                                            Description
+                                        </label>
+                                        <Field
+                                            as="textarea"
+                                            name="description"
                                             className="input input-bordered"
                                         />
                                     </div>

@@ -14,3 +14,11 @@ Live Server Site: <https://ec-360.herokuapp.com>
 email : admin@admin.com
 
 password : adminadmin
+
+## Features
+
+-   used react query for fetching and caching data
+-   used firebase for user authentication
+-   used daisyui for build user interface
+-   used formik for form handling
+-   used stripe for payment

@@ -1,9 +1,14 @@
 import axios from "axios";
 
-export const GET_URL = (str) => "http://localhost:5000" + str;
+const url =
+    process.env.NODE_ENV === "development"
+        ? "http://localhost:5000"
+        : "https://ec-360.herokuapp.com/";
+
+export const GET_URL = (str) => url + str;
 
 const apiClient = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: url,
 });
 
 export default apiClient;
