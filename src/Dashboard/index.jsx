@@ -4,10 +4,12 @@ import { NavLink, Outlet } from "react-router-dom";
 import { auth } from "../firebase.init";
 import Loading from "../utilities/Loading";
 import useFetch from "../utilities/useFetch";
+import useTitle from "../utilities/useTitle";
 import AdminNavItems from "./AdminNavItems";
 import UsersNavItems from "./UsersNavItems";
 
 const Dashboard = () => {
+    useTitle("Dashboard");
     const [user, loading] = useAuthState(auth);
 
     const { data, isLoading, error } = useFetch(

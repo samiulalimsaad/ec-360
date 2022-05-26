@@ -1,4 +1,5 @@
 import React from "react";
+import useTitle from "../utilities/useTitle";
 import Q1 from "./Q1";
 import Q2 from "./Q2";
 import Q3 from "./Q3";
@@ -7,6 +8,7 @@ import Q5 from "./Q5";
 import Q6 from "./Q6";
 
 const Blogs = () => {
+    useTitle("Blogs");
     return (
         <div className="p-10 space-y-8">
             <h2 className="text-4xl font-semibold text-center">Blogs</h2>
