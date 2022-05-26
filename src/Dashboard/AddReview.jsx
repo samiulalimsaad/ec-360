@@ -12,13 +12,14 @@ const AddReview = () => {
 
     const [user, loading] = useAuthState(auth);
 
-    const uploadReview = async (values) => {
+    const uploadReview = async (values, { resetForm }) => {
         console.log(values);
 
         try {
             const { data } = await apiClient.post("/review", values);
             if (data.success) {
                 toast.success("Review Added Successfully");
+                resetForm();
             }
         } catch (error) {
             toast.error(error.message);

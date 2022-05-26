@@ -9,7 +9,7 @@ const AdminNavItems = () => {
                     className={({ isActive }) =>
                         isActive ? "bg-base-300 font-semibold" : ""
                     }
-                    to="/dashboard/orders"
+                    to="/dashboard/manage-all-orders"
                 >
                     Manage All Orders
                 </NavLink>

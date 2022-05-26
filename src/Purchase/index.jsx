@@ -25,14 +25,12 @@ const Purchase = () => {
     }, [data]);
 
     const orderNow = async () => {
+        const payload = { ...data?.product, quantity };
+        delete payload["_id"];
         try {
-            const { data: prod } = await apiClient.post(
-                `/orders?email=${user?.email}`,
-                {
-                    ...data?.product,
-                    quantity,
-                }
-            );
+            const { data: prod } = await apiClient.post(`/orders`, payload);
+
+            console.log({ prod });
             if (prod.success) {
                 toast.success("order completed. Go dashboard to pay.");
             }

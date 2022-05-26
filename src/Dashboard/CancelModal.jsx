@@ -5,19 +5,22 @@ const CancelModal = ({ callback }) => {
     useTitle("Cancel Order | Dashboard");
     return (
         <div>
-            <input type="checkbox" id="Cancel-Modal" class="modal-toggle" />
-            <div class="modal">
-                <div class="modal-box">
-                    <h3 class="font-bold text-lg">
+            <input type="checkbox" id="Cancel-Modal" className="modal-toggle" />
+            <div className="modal">
+                <div className="modal-box">
+                    <h3 className="text-lg font-bold">
                         Do you really want to Proceed?
                     </h3>
-                    <div class="modal-action">
-                        <label for="Cancel-Modal" class="btn btn-success">
+                    <div className="modal-action">
+                        <label
+                            htmlFor="Cancel-Modal"
+                            className="btn btn-success"
+                        >
                             Skip
                         </label>
                         <label
-                            for="Cancel-Modal"
-                            class="btn btn-error"
+                            htmlFor="Cancel-Modal"
+                            className="btn btn-error"
                             onClick={callback}
                         >
                             Confirm
