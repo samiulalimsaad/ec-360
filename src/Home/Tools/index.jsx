@@ -2,12 +2,15 @@ import React from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import apiClient from "../../utilities/apiClient";
+import Loading from "../../utilities/Loading";
 
 const Tools = () => {
     const { isLoading, error, data } = useQuery(
         "tools",
         async () => (await apiClient("/products?limit=6")).data
     );
+
+    if (isLoading) return <Loading />;
 
     return (
         <section id="explore" className="container px-4 py-20 mx-auto">
@@ -18,7 +21,7 @@ const Tools = () => {
                         key={v._id}
                         className="w-full h-full shadow-xl card card-compact bg-base-100 justify-self-center "
                     >
-                        <figure className="overflow-hidden">
+                        <figure className="flex items-center justify-center overflow-hidden h-72">
                             <img
                                 className="duration-200 hover:scale-110"
                                 src={
@@ -34,11 +37,13 @@ const Tools = () => {
                             <p className="text-2xl text-slate-700">
                                 ${v.price}
                             </p>
-                            <div className="flex text-xl justify-evenly text-slate-700">
-                                <p>min:{v.minOrderQuantity}</p>
-                                <p>available{v.availableQuantity}</p>
+                            <div className="flex items-center justify-between text-xl text-slate-700">
+                                <span>min : {v.minOrderQuantity}</span>
+                                <span>available : {v.availableQuantity}</span>
                             </div>
-                            <p className="text-slate-700">{v.description}</p>
+                            <p className="line-clamp-5 text-slate-700">
+                                {v.description}
+                            </p>
                             <div className="justify-center card-actions">
                                 <Link
                                     to={`/purchase/${v._id}`}

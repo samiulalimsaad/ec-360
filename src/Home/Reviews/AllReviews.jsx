@@ -1,12 +1,16 @@
 import React from "react";
 import { useQuery } from "react-query";
 import apiClient from "../../utilities/apiClient";
+import Loading from "../../utilities/Loading";
 
 const AllReviews = () => {
     const { isLoading, error, data } = useQuery(
         "review",
         async () => (await apiClient("/reviews")).data
     );
+
+    if (isLoading) return <Loading />;
+
     return (
         <section className="container py-20 mx-auto">
             <h2 className="mb-10 text-4xl text-center">AllReviews</h2>
