@@ -18,6 +18,7 @@ import Portfolio from "../Portfolio";
 import Purchase from "../Purchase";
 import Signup from "../Signup";
 import DashboardProtected from "../utilities/DashboardProtected";
+import DashboardProtectedUser from "../utilities/DashboardProtectedUser";
 import PrivateRoute from "../utilities/PrivateRoute";
 
 const RouteNames = () => {
@@ -55,8 +56,22 @@ const RouteNames = () => {
                 }
             >
                 <Route index element={<Profile />} />
-                <Route path="my-orders" element={<MyOrders />} />
-                <Route path="add-review" element={<AddReview />} />
+                <Route
+                    path="my-orders"
+                    element={
+                        <DashboardProtectedUser>
+                            <MyOrders />
+                        </DashboardProtectedUser>
+                    }
+                />
+                <Route
+                    path="add-review"
+                    element={
+                        <DashboardProtectedUser>
+                            <AddReview />
+                        </DashboardProtectedUser>
+                    }
+                />
                 <Route
                     path="manage-all-orders"
                     element={
