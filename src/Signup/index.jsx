@@ -9,6 +9,7 @@ import {
 } from "react-firebase-hooks/auth";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../firebase.init";
+import { GET_URL } from "../utilities/apiClient";
 import useTitle from "../utilities/useTitle";
 import { signUpValidationSchema } from "../validator";
 
@@ -53,7 +54,7 @@ const Signup = () => {
                     role: "admin",
                 };
                 axios
-                    .post(`http://localhost:5000/user`, userData, {
+                    .post(GET_URL(`/user`), userData, {
                         header: {
                             "Access-Control-Allow-Origin": "*",
                             "Access-Control-Allow-Methods": "*",

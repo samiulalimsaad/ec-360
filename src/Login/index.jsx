@@ -6,12 +6,13 @@ import {
     useAuthState,
     useSignInWithEmailAndPassword,
     useSignInWithGoogle,
-    useUpdatePassword
+    useUpdatePassword,
 } from "react-firebase-hooks/auth";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { auth } from "../firebase.init";
+import { GET_URL } from "../utilities/apiClient";
 import useTitle from "../utilities/useTitle";
 import { LoginValidationSchema } from "../validator";
 
@@ -37,7 +38,7 @@ const Login = () => {
                 name: user1?.displayName,
             };
             axios
-                .post(`http://localhost:5000/user`, userData, {
+                .post(GET_URL(`/user`), userData, {
                     header: {
                         "Access-Control-Allow-Origin": "*",
                         "Access-Control-Allow-Methods": "*",
@@ -49,7 +50,7 @@ const Login = () => {
                         navigate(from, { replace: true });
                     } else {
                         axios
-                            .post(`http://localhost:5000/login`, userData, {
+                            .post(GET_URL(`/login`), userData, {
                                 header: {
                                     "Access-Control-Allow-Origin": "*",
                                     "Access-Control-Allow-Methods": "*",
