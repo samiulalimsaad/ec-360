@@ -1,9 +1,10 @@
+import axios from "axios";
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
-import apiClient from "../utilities/apiClient";
+import { GET_URL } from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
 import useFetch from "../utilities/useFetch";
 import useTitle from "../utilities/useTitle";
@@ -19,9 +20,17 @@ const Profile = () => {
 
     const updateUser = async (values) => {
         try {
-            const profile = await apiClient.patch(
-                `/user/${data?.user?._id}`,
-                values
+            const profile = await axios.patch(
+                GET_URL(`/user/${data?.user?._id}`),
+                values,
+                {
+                    headers: {
+                        "Content-type": "application/json",
+                        authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                        )}`,
+                    },
+                }
             );
             toast.success(profile.data.message);
         } catch (error) {

@@ -5,10 +5,13 @@ import {
     useStripe,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+import { signOut } from "firebase/auth";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import apiClient from "../utilities/apiClient";
+import { auth } from "../firebase.init";
+import { GET_URL } from "../utilities/apiClient";
 
 const stripePromise = loadStripe(process.env.VITE_card_key);
 
@@ -16,6 +19,7 @@ const CheckoutForm = ({ setTransactionId }) => {
     const stripe = useStripe();
     const elements = useElements();
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         // Block native form submission.
@@ -46,16 +50,34 @@ const CheckoutForm = ({ setTransactionId }) => {
             toast.error(error.message);
         } else {
             try {
-                const { data } = await apiClient.patch(`/orders/${id}`, {
-                    paid: true,
-                    status: "pending",
-                });
+                const { data } = await axios.patch(
+                    GET_URL(`/orders/${id}`),
+                    {
+                        paid: true,
+                        status: "pending",
+                    },
+                    {
+                        headers: {
+                            "Content-type": "application/json",
+                            authorization: `Bearer ${localStorage.getItem(
+                                "accessToken"
+                            )}`,
+                        },
+                    }
+                );
                 if (data.success) {
                     toast.success("Payment successful");
                     setTransactionId(paymentMethod.id);
                 }
             } catch (error) {
                 toast.error(error.message);
+                if (
+                    error.response.status === 401 ||
+                    error.response.status === 403
+                ) {
+                    signOut(auth);
+                    return navigate("/login");
+                }
             }
         }
     };

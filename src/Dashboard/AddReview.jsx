@@ -1,9 +1,11 @@
+import axios from "axios";
+import { signOut } from "firebase/auth";
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
-import apiClient from "../utilities/apiClient";
+import { GET_URL } from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
 import useTitle from "../utilities/useTitle";
 
@@ -13,15 +15,29 @@ const AddReview = () => {
     const [user, loading] = useAuthState(auth);
 
     const uploadReview = async (values, { resetForm }) => {
-        console.log(values);
-
         try {
-            const { data } = await apiClient.post("/review", values);
+            const { data } = await axios.post(GET_URL("/review"), values, {
+                headers: {
+                    "Content-type": "application/json",
+                    authorization: `Bearer ${localStorage.getItem(
+                        "accessToken"
+                    )}`,
+                },
+            });
+
+            console.log(data);
             if (data.success) {
                 toast.success("Review Added Successfully");
                 resetForm();
             }
         } catch (error) {
+            if (
+                error.response.status === 401 ||
+                error.response.status === 403
+            ) {
+                signOut(auth);
+                return location("/login");
+            }
             toast.error(error.message);
         }
     };

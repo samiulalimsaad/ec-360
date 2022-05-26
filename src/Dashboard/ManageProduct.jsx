@@ -1,8 +1,9 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
-import apiClient from "../utilities/apiClient";
+import { GET_URL } from "../utilities/apiClient";
 import useFetch from "../utilities/useFetch";
 import useTitle from "../utilities/useTitle";
 import CancelModal from "./CancelModal";
@@ -16,8 +17,16 @@ const ManageProduct = () => {
 
     const deleteProduct = async () => {
         try {
-            const { data: updatedProduct } = await apiClient.delete(
-                `/products/${productId}`
+            const { data: updatedProduct } = await axios.delete(
+                GET_URL(`/products/${productId}`),
+                {
+                    headers: {
+                        "Content-type": "application/json",
+                        authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                        )}`,
+                    },
+                }
             );
             if (updatedProduct.success) {
                 toast.success(updatedProduct.message);

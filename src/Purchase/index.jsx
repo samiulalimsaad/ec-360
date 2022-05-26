@@ -1,10 +1,11 @@
+import axios from "axios";
 import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
-import apiClient from "../utilities/apiClient";
+import { GET_URL } from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
 import useFetch from "../utilities/useFetch";
 import useTitle from "../utilities/useTitle";
@@ -31,7 +32,18 @@ const Purchase = () => {
         };
         delete payload["_id"];
         try {
-            const { data: prod } = await apiClient.post(`/orders`, payload);
+            const { data: prod } = await axios.post(
+                GET_URL(`/orders`),
+                payload,
+                {
+                    headers: {
+                        "Content-type": "application/json",
+                        authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                        )}`,
+                    },
+                }
+            );
 
             if (prod.success) {
                 toast.success("order completed. Go dashboard to pay.");

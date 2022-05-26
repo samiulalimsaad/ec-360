@@ -1,8 +1,9 @@
+import axios from "axios";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
-import apiClient from "../utilities/apiClient";
+import { GET_URL } from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
 import useTitle from "../utilities/useTitle";
 
@@ -15,9 +16,20 @@ const MakeAdmin = () => {
 
     const makeAdmin = async (id) => {
         try {
-            const { data: updatedUser } = await apiClient.patch(`/user/${id}`, {
-                role: "admin",
-            });
+            const { data: updatedUser } = await axios.patch(
+                GET_URL(`/user/${id}`),
+                {
+                    role: "admin",
+                },
+                {
+                    headers: {
+                        "Content-type": "application/json",
+                        authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                        )}`,
+                    },
+                }
+            );
             if (updatedUser.success) {
                 toast.success(updatedUser.message);
                 refetch();
@@ -29,9 +41,20 @@ const MakeAdmin = () => {
 
     const revokeAdmin = async (id) => {
         try {
-            const { data: updatedUser } = await apiClient.patch(`/user/${id}`, {
-                role: "",
-            });
+            const { data: updatedUser } = await axios.patch(
+                GET_URL(`/user/${id}`),
+                {
+                    role: "",
+                },
+                {
+                    headers: {
+                        "Content-type": "application/json",
+                        authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                        )}`,
+                    },
+                }
+            );
             if (updatedUser.success) {
                 toast.success(updatedUser.message);
                 refetch();

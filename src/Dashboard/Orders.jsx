@@ -1,8 +1,9 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
-import apiClient from "../utilities/apiClient";
+import { GET_URL } from "../utilities/apiClient";
 import useTitle from "../utilities/useTitle";
 import CancelModal from "./CancelModal";
 
@@ -15,9 +16,20 @@ const Orders = () => {
 
     const deleteProduct = async (id) => {
         try {
-            const { data: updatedUser } = await apiClient.patch(`/user/${id}`, {
-                role: "admin",
-            });
+            const { data: updatedUser } = await axios.patch(
+                GET_URL(`/user/${id}`),
+                {
+                    role: "admin",
+                },
+                {
+                    headers: {
+                        "Content-type": "application/json",
+                        authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                        )}`,
+                    },
+                }
+            );
             if (updatedUser.success) {
                 toast.success(updatedUser.message);
                 refetch();
@@ -29,10 +41,18 @@ const Orders = () => {
 
     const updateStatus = async (id) => {
         try {
-            const { data: updatedOrder } = await apiClient.patch(
-                `/orders/${id}?email=${user?.email}`,
+            const { data: updatedOrder } = await axios.patch(
+                GET_URL(`/orders/${id}?email=${user?.email}`),
                 {
                     status: "shipped",
+                },
+                {
+                    headers: {
+                        "Content-type": "application/json",
+                        authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                        )}`,
+                    },
                 }
             );
             if (updatedOrder.success) {

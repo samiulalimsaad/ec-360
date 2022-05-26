@@ -1,7 +1,10 @@
+import axios from "axios";
+import { signOut } from "firebase/auth";
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import { toast } from "react-toastify";
-import apiClient from "../utilities/apiClient";
+import { auth } from "../firebase.init";
+import { GET_URL } from "../utilities/apiClient";
 import useTitle from "../utilities/useTitle";
 const initialValues = {
     name: "",
@@ -15,14 +18,26 @@ const AddProduct = () => {
     useTitle("add a Product | Dashboard");
 
     const uploadProduct = async (values) => {
-        console.log(values);
-
         try {
-            const { data } = await apiClient.post("/product", values);
+            const { data } = await axios.post(GET_URL("/product"), values, {
+                headers: {
+                    "Content-type": "application/json",
+                    authorization: `Bearer ${localStorage.getItem(
+                        "accessToken"
+                    )}`,
+                },
+            });
             if (data.success) {
                 toast.success("Product Added Successfully");
             }
         } catch (error) {
+            if (
+                error.response.status === 401 ||
+                error.response.status === 403
+            ) {
+                signOut(auth);
+                return location("/login");
+            }
             toast.error(error.message);
         }
     };

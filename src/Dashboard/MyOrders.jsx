@@ -1,9 +1,10 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
-import apiClient from "../utilities/apiClient";
+import { GET_URL } from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
 import useFetch from "../utilities/useFetch";
 import useTitle from "../utilities/useTitle";
@@ -23,7 +24,17 @@ const MyOrders = () => {
 
     const cancelProduct = async () => {
         try {
-            const { data } = await apiClient.delete(`/orders/${productId}`);
+            const { data } = await axios.delete(
+                GET_URL(`/orders/${productId}`),
+                {
+                    headers: {
+                        "Content-type": "application/json",
+                        authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                        )}`,
+                    },
+                }
+            );
             if (data.success) {
                 toast.success("Order Canceled Successfully");
                 refetch();
