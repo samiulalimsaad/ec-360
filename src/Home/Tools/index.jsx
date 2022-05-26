@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import apiClient from "../utilities/apiClient";
+import apiClient from "../../utilities/apiClient";
 
 const Tools = () => {
     const { isLoading, error, data } = useQuery(

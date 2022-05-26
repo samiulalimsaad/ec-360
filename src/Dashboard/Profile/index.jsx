@@ -3,11 +3,11 @@ import { Field, Form, Formik } from "formik";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
-import { auth } from "../firebase.init";
-import { GET_URL } from "../utilities/apiClient";
-import Loading from "../utilities/Loading";
-import useFetch from "../utilities/useFetch";
-import useTitle from "../utilities/useTitle";
+import { auth } from "../../firebase.init";
+import { GET_URL } from "../../utilities/apiClient";
+import Loading from "../../utilities/Loading";
+import useFetch from "../../utilities/useFetch";
+import useTitle from "../../utilities/useTitle";
 
 const Profile = () => {
     useTitle("Profile | Dashboard");

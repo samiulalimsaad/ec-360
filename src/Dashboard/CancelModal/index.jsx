@@ -1,5 +1,5 @@
 import React from "react";
-import useTitle from "../utilities/useTitle";
+import useTitle from "../../utilities/useTitle";
 
 const CancelModal = ({ callback }) => {
     useTitle("Cancel Order | Dashboard");

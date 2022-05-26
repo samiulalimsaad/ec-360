@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { auth } from "../firebase.init";
-import { GET_URL } from "../utilities/apiClient";
-import Loading from "../utilities/Loading";
-import useFetch from "../utilities/useFetch";
-import useTitle from "../utilities/useTitle";
-import CancelModal from "./CancelModal";
+import { auth } from "../../firebase.init";
+import { GET_URL } from "../../utilities/apiClient";
+import Loading from "../../utilities/Loading";
+import useFetch from "../../utilities/useFetch";
+import useTitle from "../../utilities/useTitle";
+import CancelModal from "../CancelModal";
 
 const MyOrders = () => {
     useTitle("My Order | Dashboard");

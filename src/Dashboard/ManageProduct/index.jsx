@@ -2,11 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
-import { auth } from "../firebase.init";
-import { GET_URL } from "../utilities/apiClient";
-import useFetch from "../utilities/useFetch";
-import useTitle from "../utilities/useTitle";
-import CancelModal from "./CancelModal";
+import { auth } from "../../firebase.init";
+import { GET_URL } from "../../utilities/apiClient";
+import useFetch from "../../utilities/useFetch";
+import useTitle from "../../utilities/useTitle";
+import CancelModal from "../CancelModal";
 
 const ManageProduct = () => {
     useTitle("Manage Product | Dashboard");

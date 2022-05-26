@@ -2,21 +2,24 @@ import axios from "axios";
 import { signOut } from "firebase/auth";
 import { Field, Form, Formik } from "formik";
 import React from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
-import { auth } from "../firebase.init";
-import { GET_URL } from "../utilities/apiClient";
-import Loading from "../utilities/Loading";
-import useTitle from "../utilities/useTitle";
+import { auth } from "../../firebase.init";
+import { GET_URL } from "../../utilities/apiClient";
+import useTitle from "../../utilities/useTitle";
+const initialValues = {
+    name: "",
+    image: "",
+    minOrderQuantity: "",
+    availableQuantity: "",
+    price: "",
+};
 
-const AddReview = () => {
-    useTitle("Add Review | Dashboard");
+const AddProduct = () => {
+    useTitle("add a Product | Dashboard");
 
-    const [user, loading] = useAuthState(auth);
-
-    const uploadReview = async (values, { resetForm }) => {
+    const uploadProduct = async (values) => {
         try {
-            const { data } = await axios.post(GET_URL("/review"), values, {
+            const { data } = await axios.post(GET_URL("/product"), values, {
                 headers: {
                     "Content-type": "application/json",
                     authorization: `Bearer ${localStorage.getItem(
@@ -24,11 +27,8 @@ const AddReview = () => {
                     )}`,
                 },
             });
-
-            console.log(data);
             if (data.success) {
-                toast.success("Review Added Successfully");
-                resetForm();
+                toast.success("Product Added Successfully");
             }
         } catch (error) {
             if (
@@ -42,69 +42,68 @@ const AddReview = () => {
         }
     };
 
-    if (loading) return <Loading />;
-
-    const initialValues = {
-        name: user?.displayName,
-        email: user?.email,
-        description: "",
-        rating: 5,
-    };
-
     return (
         <div>
             <div className="min-h-screen hero bg-base-200">
                 <h2>Add Product</h2>
                 <div className="w-full max-w-xl shadow-2xl card bg-base-100">
                     <Formik
-                        onSubmit={uploadReview}
+                        onSubmit={uploadProduct}
                         initialValues={initialValues}
                     >
                         {({ isSubmitting }) => (
                             <Form className="card-body">
                                 <fieldset className="p-6 border rounded border-base-900">
                                     <legend className="text-xl font-semibold text-center text-slate-900">
-                                        Review:
+                                        Product Information:
                                     </legend>
                                     <div className="form-control">
                                         <label className="label label-text">
-                                            Name
+                                            Product Name
                                         </label>
                                         <Field
                                             type="text"
                                             name="name"
                                             className="input input-bordered"
-                                            disabled
                                         />
                                     </div>
                                     <div className="form-control">
                                         <label className="label label-text">
-                                            Email
+                                            Product Price
                                         </label>
                                         <Field
-                                            type="email"
-                                            name="email"
+                                            type="text"
+                                            name="price"
                                             className="input input-bordered"
-                                            disabled
                                         />
                                     </div>
                                     <div className="form-control">
                                         <label className="label label-text">
-                                            Rating
+                                            Min Order
                                         </label>
                                         <Field
                                             type="number"
-                                            name="rating"
+                                            name="minOrderQuantity"
                                             className="input input-bordered"
                                         />
                                     </div>
                                     <div className="form-control">
                                         <label className="label label-text">
-                                            Description
+                                            Available
                                         </label>
                                         <Field
-                                            as="textarea"
-                                            name="description"
+                                            type="number"
+                                            name="availableQuantity"
+                                            className="input input-bordered"
+                                        />
+                                    </div>
+                                    <div className="form-control">
+                                        <label className="label label-text">
+                                            Image Link
+                                        </label>
+                                        <Field
+                                            type="text"
+                                            name="image"
                                             className="input input-bordered"
                                         />
                                     </div>
@@ -126,4 +125,4 @@ const AddReview = () => {
     );
 };
 
-export default AddReview;
+export default AddProduct;

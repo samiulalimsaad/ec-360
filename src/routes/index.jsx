@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import NotFound from "../404/NotFound";
-import AllReviews from "../AllReviews";
+import Blogs from "../Blogs";
 import Dashboard from "../Dashboard";
 import AddProduct from "../Dashboard/AddProduct";
 import AddReview from "../Dashboard/AddReview";
@@ -10,6 +10,7 @@ import ManageProduct from "../Dashboard/ManageProduct";
 import MyOrders from "../Dashboard/MyOrders";
 import Profile from "../Dashboard/Profile";
 import Home from "../Home";
+import AllReviews from "../Home/Reviews/AllReviews";
 import Login from "../Login";
 import Payment from "../Payment";
 import Portfolio from "../Portfolio";
@@ -25,7 +26,8 @@ const RouteNames = () => {
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
             <Route path="portfolio" element={<Portfolio />} />
-            <Route path="/all-reviews" element={<AllReviews />} />
+            <Route path="blogs" element={<Blogs />} />
+            <Route path="all-reviews" element={<AllReviews />} />
             <Route
                 path="payment/:id"
                 element={
