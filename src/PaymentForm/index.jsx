@@ -17,8 +17,6 @@ const CheckoutForm = ({ setTransactionId }) => {
     const elements = useElements();
     const { id } = useParams();
 
-    console.log({ id });
-
     const handleSubmit = async (event) => {
         // Block native form submission.
         event.preventDefault();
@@ -50,9 +48,8 @@ const CheckoutForm = ({ setTransactionId }) => {
             try {
                 const { data } = await apiClient.patch(`/orders/${id}`, {
                     paid: true,
-                    status: "shipped",
+                    status: "pending",
                 });
-                console.log({ data });
                 if (data.success) {
                     toast.success("Payment successful");
                     setTransactionId(paymentMethod.id);

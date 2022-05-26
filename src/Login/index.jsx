@@ -6,7 +6,7 @@ import {
     useAuthState,
     useSignInWithEmailAndPassword,
     useSignInWithGoogle,
-    useUpdatePassword,
+    useUpdatePassword
 } from "react-firebase-hooks/auth";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -44,7 +44,6 @@ const Login = () => {
                     },
                 })
                 .then(({ data }) => {
-                    console.log(data);
                     if (data.success) {
                         localStorage.setItem("accessToken", data.token);
                         navigate(from, { replace: true });

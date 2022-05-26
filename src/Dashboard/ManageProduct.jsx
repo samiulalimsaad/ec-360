@@ -16,7 +16,6 @@ const ManageProduct = () => {
         ["make-admin"],
         async () => (await apiClient("/products")).data
     );
-    console.log({ data });
     const deleteProduct = async () => {
         try {
             const { data: updatedProduct } = await apiClient.delete(

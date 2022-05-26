@@ -35,7 +35,6 @@ const MyOrders = () => {
 
     if (isLoading || loading) return <Loading />;
 
-    console.log(data);
     return (
         <div className="p-10">
             <div className="overflow-x-auto">
@@ -60,9 +59,11 @@ const MyOrders = () => {
                                 <td>{v.status || ""}</td>
                                 <td>
                                     {v.paid ? (
-                                        <button className="btn btn-ghost text-success">
-                                            Paid
-                                        </button>
+                                        <div className="flex justify-center">
+                                            <button className="btn btn-ghost text-success">
+                                                Paid
+                                            </button>
+                                        </div>
                                     ) : (
                                         <div className="flex gap-2">
                                             <Link

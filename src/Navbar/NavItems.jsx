@@ -14,10 +14,6 @@ const items = [
         path: "/blogs",
     },
     {
-        name: "dashboard",
-        path: "/dashboard",
-    },
-    {
         name: "portfolio",
         path: "/portfolio",
     },
@@ -36,6 +32,9 @@ const NavItems = () => {
             ))}
             {user ? (
                 <>
+                    <li>
+                        <CustomLink to="dashboard">Dashboard</CustomLink>
+                    </li>
                     <button
                         className="btn btn-ghost"
                         onClick={() => signOut(auth)}

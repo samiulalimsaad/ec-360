@@ -39,7 +39,6 @@ const Orders = () => {
                     status: "shipped",
                 }
             );
-            console.log({ updatedOrder });
             if (updatedOrder.success) {
                 toast.success(updatedOrder.message);
                 // refetch();
