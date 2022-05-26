@@ -32,9 +32,35 @@ const ManageAllOrders = () => {
         }
     };
 
+    const updateOrder = async (id) => {
+        const payload = {
+            paid: true,
+            status: "shipped",
+        };
+        try {
+            const { data: prod } = await apiClient.patch(
+                `/orders/${id}`,
+                payload
+            );
+
+            if (prod.success) {
+                toast.success("order completed. Go dashboard to pay.");
+                refetch();
+            }
+        } catch (error) {
+            if (
+                error.response.status === 401 ||
+                error.response.status === 403
+            ) {
+                signOut(auth);
+                return location("/login");
+            }
+            toast.error(error.message);
+        }
+    };
+
     if (isLoading || loading) return <Loading />;
 
-    console.log(data);
     return (
         <div className="p-10">
             <div className="overflow-x-auto">
@@ -46,6 +72,7 @@ const ManageAllOrders = () => {
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,12 +83,27 @@ const ManageAllOrders = () => {
                                 <td>{v.price}</td>
                                 <td>{v.quantity}</td>
                                 <td>
+                                    <button
+                                        className="btn btn-success"
+                                        onClick={() => {
+                                            updateOrder(v._id);
+                                        }}
+                                    >
+                                        {v.status}
+                                    </button>
+                                </td>
+                                <td>
                                     {v.paid ? (
-                                        <button className="btn btn-ghost text-success">
-                                            Paid
-                                        </button>
+                                        <div className="flex justify-center">
+                                            <button className="btn btn-ghost text-success">
+                                                Paid
+                                            </button>
+                                        </div>
                                     ) : (
                                         <div className="flex gap-2">
+                                            <button className="btn btn-info">
+                                                Unpaid
+                                            </button>
                                             <label
                                                 htmlFor="Cancel-Modal"
                                                 className="btn btn-warning"
