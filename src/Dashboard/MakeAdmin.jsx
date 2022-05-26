@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
 import { GET_URL } from "../utilities/apiClient";
 import Loading from "../utilities/Loading";
+import useFetch from "../utilities/useFetch";
 import useTitle from "../utilities/useTitle";
 
 const MakeAdmin = () => {
@@ -12,7 +13,7 @@ const MakeAdmin = () => {
 
     const [user, loading] = useAuthState(auth);
 
-    const { data, isLoading, error } = useFetch(`/all-user`, user);
+    const { data, isLoading, error, refetch } = useFetch(`/all-user`, user);
 
     const makeAdmin = async (id) => {
         try {

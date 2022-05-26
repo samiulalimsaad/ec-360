@@ -13,7 +13,7 @@ const Profile = () => {
     useTitle("Profile | Dashboard");
     const [user, loading, userError] = useAuthState(auth);
 
-    const { data, isLoading, error } = useFetch(
+    const { data, isLoading, error, refetch } = useFetch(
         `/user?email=${user?.email}`,
         user
     );
@@ -33,6 +33,7 @@ const Profile = () => {
                 }
             );
             toast.success(profile.data.message);
+            refetch();
         } catch (error) {
             toast.error(error.message);
         }

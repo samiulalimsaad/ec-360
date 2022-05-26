@@ -1,6 +1,7 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Navigate, useLocation } from "react-router-dom";
 import { auth } from "../firebase.init";
+import Loading from "./Loading";
 import useFetch from "./useFetch";
 
 const DashboardProtected = ({ children }) => {
@@ -11,6 +12,11 @@ const DashboardProtected = ({ children }) => {
         `/user?email=${user?.email}`,
         user
     );
+
+    console.log({ data });
+    if (loading || isLoading) {
+        return <Loading />;
+    }
 
     if (data?.user?.role !== "admin") {
         return <Navigate to="/dashboard" state={{ from: location }} replace />;

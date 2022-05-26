@@ -4,6 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
 import { GET_URL } from "../utilities/apiClient";
+import useFetch from "../utilities/useFetch";
 import useTitle from "../utilities/useTitle";
 import CancelModal from "./CancelModal";
 
@@ -12,7 +13,7 @@ const Orders = () => {
     const [productId, setProductId] = useState("");
     const [user, loading, userError] = useAuthState(auth);
 
-    const { data, isLoading, error } = useFetch(`/orders`, user);
+    const { data, isLoading, error, refetch } = useFetch(`/orders`, user);
 
     const deleteProduct = async (id) => {
         try {
@@ -57,7 +58,7 @@ const Orders = () => {
             );
             if (updatedOrder.success) {
                 toast.success(updatedOrder.message);
-                // refetch();
+                refetch();
             }
         } catch (error) {
             toast.error(error.message);

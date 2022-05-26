@@ -17,7 +17,7 @@ const MyOrders = () => {
 
     const [user, loading, userError] = useAuthState(auth);
 
-    const { data, isLoading, error } = useFetch(
+    const { data, isLoading, error, refetch } = useFetch(
         `/my-orders/${user?.email}`,
         user
     );

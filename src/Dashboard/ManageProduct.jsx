@@ -13,7 +13,7 @@ const ManageProduct = () => {
     const [productId, setProductId] = useState("");
     const [user, loading, userError] = useAuthState(auth);
 
-    const { data, isLoading, error } = useFetch(`/products`, user);
+    const { data, isLoading, error, refetch } = useFetch(`/products`, user);
 
     const deleteProduct = async () => {
         try {

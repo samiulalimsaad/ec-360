@@ -16,7 +16,7 @@ const ManageAllOrders = () => {
 
     const [user, loading, userError] = useAuthState(auth);
 
-    const { data, isLoading, error } = useFetch(`/orders`, user);
+    const { data, isLoading, error, refetch } = useFetch(`/orders`, user);
 
     const cancelProduct = async () => {
         try {
