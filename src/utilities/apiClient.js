@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://ec-360.herokuapp.com/";
+const url = "https://ec-360.herokuapp.com";
 
 export const GET_URL = (str) => url + str;
 
