@@ -9,10 +9,10 @@ const items = [
         name: "home",
         path: "/",
     },
-    {
-        name: "blogs",
-        path: "/blogs",
-    },
+    // {
+    //     name: "blogs",
+    //     path: "/blogs",
+    // },
     {
         name: "portfolio",
         path: "/portfolio",
