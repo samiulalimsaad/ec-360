@@ -4,7 +4,7 @@ import useTitle from "../utilities/useTitle";
 const Portfolio = () => {
     useTitle("Portfolio");
     return (
-        <section className="flex items-center justify-center w-screen h-screen">
+        <section className="flex items-center justify-center w-full h-screen mx-auto bg-white">
             <iframe
                 height="100%"
                 width="100%"
