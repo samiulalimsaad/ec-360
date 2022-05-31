@@ -66,7 +66,7 @@ const Purchase = () => {
         <section>
             <div className="min-h-screen hero bg-base-200">
                 <h2>Purchase</h2>
-                <div className="w-full max-w-xl shadow-2xl card bg-base-100">
+                <div className="w-full max-w-xl card bg-base-100">
                     <div className="card-body">
                         <fieldset className="p-6 border rounded border-base-900">
                             <legend className="text-xl font-semibold text-slate-900">

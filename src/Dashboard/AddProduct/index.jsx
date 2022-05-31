@@ -51,7 +51,7 @@ const AddProduct = () => {
         <section>
             <div className="min-h-screen hero bg-base-200">
                 <h2>Add Product</h2>
-                <div className="w-full max-w-xl shadow-2xl card bg-base-100">
+                <div className="w-full max-w-xl card bg-base-100">
                     <Formik
                         onSubmit={uploadProduct}
                         initialValues={initialValues}
