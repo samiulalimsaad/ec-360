@@ -17,10 +17,18 @@ const SingleProduct = ({ product }) => {
             </figure>
             <div className="card-body">
                 <h2 className="card-title">{product.name}</h2>
-                <p className="text-2xl text-slate-700">${product.price}</p>
+                <div className="flex text-2xl text-slate-700">
+                    <span className="p-1 bg-secondary -rotate-12">
+                        ${product.price}
+                    </span>
+                </div>
                 <div className="flex items-center justify-between text-xl text-slate-700">
-                    <span>min : {product.minOrderQuantity}</span>
-                    <span>available : {product.availableQuantity}</span>
+                    <span className="text-warning">
+                        Min : {product.minOrderQuantity}
+                    </span>
+                    <span className="text-success">
+                        Available : {product.availableQuantity}
+                    </span>
                 </div>
                 <p className="line-clamp-5 text-slate-700">
                     {product.description}

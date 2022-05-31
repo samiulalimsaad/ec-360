@@ -8,7 +8,7 @@ import SingleProduct from "./SingleProduct";
 const Products = () => {
     const { isLoading, error, data } = useQuery(
         "tools",
-        async () => (await apiClient("/products?limit=6")).data
+        async () => (await apiClient("/products?limit=8")).data
     );
 
     if (isLoading) return <Loading />;
@@ -16,7 +16,7 @@ const Products = () => {
     return (
         <section id="explore" className="container px-4 py-20 mx-auto">
             <h2 className="my-5 text-5xl text-center">Products</h2>
-            <div className="grid items-center h-full grid-cols-1 gap-5 justify-evenly sm:grid-cols-2 md:grid-cols-3">
+            <div className="grid items-center h-full grid-cols-1 gap-5 justify-evenly sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {data?.products?.map((v) => (
                     <SingleProduct key={v._id} product={v} />
                 ))}
